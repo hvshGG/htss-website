@@ -47,29 +47,20 @@
         .text-mask { overflow: hidden; display: block; padding-bottom: 4px; }
         .text-mask-inner { display: block; transform: translateY(110%); will-change: transform; }
 
-        /* 
-         * АДАПТИВНЫЙ СКРОЛЛЕР 
-         * ИСПРАВЛЕНИЕ: Добавлен отрицательный отступ (margin-top: -100svh), 
-         * чтобы слайды сразу накрывали видео на телефоне
-         */
         #hero-scroller { position: relative; width: 100%; background: #172554; }
         #hero-container { display: flex; flex-direction: column; width: 100%; will-change: transform; margin-top: -100svh; } 
         .hero-slide { width: 100%; height: 100svh; position: relative; flex-shrink: 0; display: flex; align-items: center; overflow: hidden; }
         
         @media (min-width: 768px) {
             #hero-scroller { height: 100vh; overflow: hidden; }
-            #hero-container { flex-direction: row; width: 300vw; height: 100vh; margin-top: 0; } /* Убираем отступ на ПК */
+            #hero-container { flex-direction: row; width: 300vw; height: 100vh; margin-top: 0; } 
             .hero-slide { width: 100vw; height: 100vh; }
         }
 
-        /* Фоновое видео */
         #bg-wrapper { position: sticky; top: 0; left: 0; width: 100%; height: 100svh; z-index: 0; overflow: hidden; }
-        @media (min-width: 768px) {
-            #bg-wrapper { position: absolute; height: 100vh; }
-        }
+        @media (min-width: 768px) { #bg-wrapper { position: absolute; height: 100vh; } }
         #bg-parallax { width: 100%; height: 100%; object-fit: cover; object-position: center; }
         
-        /* Радар */
         .tech-ring-container { position: relative; width: 100%; max-width: 320px; aspect-ratio: 1; margin: 0 auto; display: flex; align-items: center; justify-content: center; }
         @media (min-width: 768px) { .tech-ring-container { max-width: 400px; } }
         .tech-ring { position: absolute; border-radius: 50%; border: 1px solid rgba(245, 158, 11, 0.15); box-sizing: border-box; will-change: transform; }
@@ -82,7 +73,6 @@
         .badge-1 { top: 5%; left: 0%; } .badge-2 { bottom: 15%; right: -5%; } .badge-3 { top: 40%; right: -10%; } .badge-4 { bottom: 10%; left: -5%; }
         @keyframes spin { 100% { transform: rotate(360deg); } } @keyframes spin-reverse { 100% { transform: rotate(-360deg); } }
 
-        /* Карточки направлений */
         .direction-card { position: relative; overflow: hidden; border-radius: 0.75rem; }
         .direction-bg { position: absolute; inset: 0; background-size: cover; background-position: center; transition: transform 0.5s ease; opacity: 0.5; z-index: 0; filter: grayscale(50%); }
         .direction-card:hover .direction-bg { transform: scale(1.05); opacity: 0.8; filter: grayscale(0%); }
@@ -103,21 +93,31 @@
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex items-center justify-between h-16 md:h-20 transition-all" id="nav-inner">
                 
-                <!-- Логотип -->
                 <div class="flex-shrink-0 font-heading font-bold text-2xl md:text-4xl tracking-widest uppercase cursor-pointer nav-link" data-target="#hero-scroller">
                     HTSS <span class="text-htss-gold">& CO.</span>
                 </div>
 
                 <!-- Desktop Menu -->
-                <div class="hidden md:flex space-x-8 items-center">
-                    <a href="#about" class="nav-link font-heading text-[11px] font-bold tracking-widest hover:text-htss-gold transition-colors uppercase" data-target="#about">О компании</a>
-                    <a href="#philosophy" class="nav-link font-heading text-[11px] font-bold tracking-widest hover:text-htss-gold transition-colors uppercase" data-target="#philosophy">Подход</a>
-                    <a href="#directions" class="nav-link font-heading text-[11px] font-bold tracking-widest hover:text-htss-gold transition-colors uppercase" data-target="#directions">Направления</a>
-                    <a href="#services" class="nav-link font-heading text-[11px] font-bold tracking-widest hover:text-htss-gold transition-colors uppercase" data-target="#services">Услуги</a>
+                <div class="hidden md:flex space-x-6 lg:space-x-8 items-center">
+                    <a href="#about" class="nav-link font-heading text-[11px] font-bold tracking-widest hover:text-htss-gold transition-colors uppercase" data-target="#about" data-i18n="nav_about">О компании</a>
+                    <a href="#philosophy" class="nav-link font-heading text-[11px] font-bold tracking-widest hover:text-htss-gold transition-colors uppercase" data-target="#philosophy" data-i18n="nav_approach">Подход</a>
+                    <a href="#directions" class="nav-link font-heading text-[11px] font-bold tracking-widest hover:text-htss-gold transition-colors uppercase" data-target="#directions" data-i18n="nav_sectors">Направления</a>
+                    <a href="#services" class="nav-link font-heading text-[11px] font-bold tracking-widest hover:text-htss-gold transition-colors uppercase" data-target="#services" data-i18n="nav_services">Услуги</a>
+                    
+                    <!-- Кнопка заявки -->
                     <button onclick="openModal()" class="font-heading group relative px-6 py-2 font-bold text-white rounded overflow-hidden bg-transparent border border-htss-gold uppercase tracking-wider text-xs">
-                        <span class="relative z-10 group-hover:text-htss-dark transition-colors duration-300">Оставить заявку</span>
+                        <span class="relative z-10 group-hover:text-htss-dark transition-colors duration-300" data-i18n="btn_request">Оставить заявку</span>
                         <div class="absolute inset-0 h-full w-full bg-htss-gold transform scale-x-0 origin-left group-hover:scale-x-100 transition-transform duration-300 ease-out z-0"></div>
                     </button>
+
+                    <!-- Language Switcher Desktop (Перемещен вправо) -->
+                    <div class="flex items-center space-x-2 pl-2 lg:pl-4 border-l border-htss-border">
+                        <button onclick="setLanguage('ru')" class="lang-btn text-[10px] font-bold tracking-widest hover:text-htss-gold transition-colors" data-lang="ru">RU</button>
+                        <span class="text-gray-600 text-[10px]">|</span>
+                        <button onclick="setLanguage('kk')" class="lang-btn text-[10px] font-bold tracking-widest hover:text-htss-gold transition-colors" data-lang="kk">KZ</button>
+                        <span class="text-gray-600 text-[10px]">|</span>
+                        <button onclick="setLanguage('en')" class="lang-btn text-[10px] font-bold tracking-widest hover:text-htss-gold transition-colors" data-lang="en">EN</button>
+                    </div>
                 </div>
 
                 <!-- Mobile Hamburger Button -->
@@ -135,17 +135,24 @@
 
     <!-- Mobile Menu Overlay -->
     <div id="mobile-menu" class="fixed inset-0 bg-htss-dark/98 backdrop-blur-xl z-40 transform translate-x-full transition-transform duration-300 flex flex-col justify-center items-center space-y-8">
-        <a href="#about" class="mobile-link nav-link font-heading text-xl font-bold tracking-widest text-white hover:text-htss-gold uppercase" data-target="#about">О компании</a>
-        <a href="#philosophy" class="mobile-link nav-link font-heading text-xl font-bold tracking-widest text-white hover:text-htss-gold uppercase" data-target="#philosophy">Подход</a>
-        <a href="#directions" class="mobile-link nav-link font-heading text-xl font-bold tracking-widest text-white hover:text-htss-gold uppercase" data-target="#directions">Направления</a>
-        <a href="#services" class="mobile-link nav-link font-heading text-xl font-bold tracking-widest text-white hover:text-htss-gold uppercase" data-target="#services">Услуги</a>
-        <button onclick="openModal(); toggleMobileMenu()" class="font-heading mt-8 bg-htss-gold text-white px-8 py-4 rounded font-bold uppercase tracking-widest text-sm shadow-[0_0_30px_rgba(245,158,11,0.2)]">Оставить заявку</button>
+        <a href="#about" class="mobile-link nav-link font-heading text-xl font-bold tracking-widest text-white hover:text-htss-gold uppercase" data-target="#about" data-i18n="nav_about">О компании</a>
+        <a href="#philosophy" class="mobile-link nav-link font-heading text-xl font-bold tracking-widest text-white hover:text-htss-gold uppercase" data-target="#philosophy" data-i18n="nav_approach">Подход</a>
+        <a href="#directions" class="mobile-link nav-link font-heading text-xl font-bold tracking-widest text-white hover:text-htss-gold uppercase" data-target="#directions" data-i18n="nav_sectors">Направления</a>
+        <a href="#services" class="mobile-link nav-link font-heading text-xl font-bold tracking-widest text-white hover:text-htss-gold uppercase" data-target="#services" data-i18n="nav_services">Услуги</a>
+        
+        <!-- Language Switcher Mobile -->
+        <div class="flex items-center space-x-6 pt-4">
+            <button onclick="setLanguage('ru'); toggleMobileMenu()" class="lang-btn text-sm font-bold tracking-widest hover:text-htss-gold transition-colors" data-lang="ru">RU</button>
+            <button onclick="setLanguage('kk'); toggleMobileMenu()" class="lang-btn text-sm font-bold tracking-widest hover:text-htss-gold transition-colors" data-lang="kk">KZ</button>
+            <button onclick="setLanguage('en'); toggleMobileMenu()" class="lang-btn text-sm font-bold tracking-widest hover:text-htss-gold transition-colors" data-lang="en">EN</button>
+        </div>
+
+        <button onclick="openModal(); toggleMobileMenu()" class="font-heading mt-8 bg-htss-gold text-white px-8 py-4 rounded font-bold uppercase tracking-widest text-sm shadow-[0_0_30px_rgba(245,158,11,0.2)]" data-i18n="btn_request">Оставить заявку</button>
     </div>
 
     <!-- ГЛАВНЫЙ СЛАЙДЕР -->
     <section id="hero-scroller">
         
-        <!-- Фоновое видео -->
         <div id="bg-wrapper">
             <video id="bg-parallax" autoplay muted playsinline preload="auto" crossorigin="anonymous">
                 <source src="https://res.cloudinary.com/qrz1njiq/video/upload/v1785843449/timelapse_fsc9sw.mp4" type="video/mp4">
@@ -154,7 +161,7 @@
 
         <div id="hero-container" class="relative z-10">
             
-            <!-- СЛАЙД 1: Главный Экран -->
+            <!-- СЛАЙД 1 -->
             <div class="hero-slide" id="slide-1">
                 <div class="absolute inset-0 bg-gradient-to-t md:bg-gradient-to-r from-[#172554] via-[#172554]/80 to-transparent z-0"></div>
                 
@@ -166,21 +173,21 @@
                             </h2>
                         </div>
                         <h1 class="font-heading font-extrabold text-4xl md:text-6xl lg:text-7xl leading-[1.1] uppercase mb-6 md:mb-8 drop-shadow-xl">
-                            <span class="text-mask"><span class="text-mask-inner">ПРОЕКТИРУЕМ.</span></span>
-                            <span class="text-mask"><span class="text-mask-inner">СОЗДАЕМ.</span></span>
-                            <span class="text-mask"><span class="text-mask-inner text-htss-gold">РЕАЛИЗУЕМ.</span></span>
+                            <span class="text-mask"><span class="text-mask-inner" data-i18n="hero_title1">ПРОЕКТИРУЕМ.</span></span>
+                            <span class="text-mask"><span class="text-mask-inner" data-i18n="hero_title2">СОЗДАЕМ.</span></span>
+                            <span class="text-mask"><span class="text-mask-inner text-htss-gold" data-i18n="hero_title3">РЕАЛИЗУЕМ.</span></span>
                         </h1>
                         <div class="text-mask mb-8 md:mb-10">
-                            <p class="text-mask-inner text-gray-300 text-sm md:text-lg font-light leading-relaxed border-l-2 border-htss-gold pl-4">
+                            <p class="text-mask-inner text-gray-300 text-sm md:text-lg font-light leading-relaxed border-l-2 border-htss-gold pl-4" data-i18n="hero_desc">
                                 Инженерно-строительная компания, специализирующаяся на проектировании, строительстве и комплексной реализации объектов различного назначения.
                             </p>
                         </div>
                         <div class="flex items-center space-x-6 text-mask-inner">
-                            <button onclick="openModal()" class="font-heading bg-htss-gold hover:bg-yellow-600 text-white px-6 py-3 md:px-8 md:py-4 rounded font-bold transition-all uppercase tracking-widest text-[10px] md:text-xs shadow-[0_0_30px_rgba(245,158,11,0.2)] relative z-50">
+                            <button onclick="openModal()" class="font-heading bg-htss-gold hover:bg-yellow-600 text-white px-6 py-3 md:px-8 md:py-4 rounded font-bold transition-all uppercase tracking-widest text-[10px] md:text-xs shadow-[0_0_30px_rgba(245,158,11,0.2)] relative z-50" data-i18n="hero_btn">
                                 Получить консультацию
                             </button>
                             <div class="hidden md:flex flex-col text-gray-500 animate-pulse">
-                                <span class="text-[10px] uppercase tracking-widest font-heading font-bold">Скролл вниз</span>
+                                <span class="text-[10px] uppercase tracking-widest font-heading font-bold" data-i18n="scroll_down">Скролл вниз</span>
                                 <svg class="w-5 h-5 mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"></path></svg>
                             </div>
                         </div>
@@ -188,7 +195,7 @@
                 </div>
             </div>
 
-            <!-- СЛАЙД 2: 3D КАРУСЕЛЬ ГРАФИКОВ -->
+            <!-- СЛАЙД 2 -->
             <div class="hero-slide" id="slide-2">
                 <div class="absolute inset-0 bg-[#172554]/85 z-0"></div>
                 <div class="absolute inset-0 opacity-10 z-0" style="background-image: radial-gradient(circle at 2px 2px, white 1px, transparent 0); background-size: 40px 40px;"></div>
@@ -196,23 +203,22 @@
                 <div class="relative z-10 w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col justify-center h-full pt-16 md:pt-0">
                     <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-center">
                         <div>
-                            <h2 class="anim-slide-2 font-heading text-htss-gold font-bold tracking-widest uppercase text-[10px] md:text-sm mb-2 md:mb-4">Стратегия Развития</h2>
-                            <h3 class="anim-slide-2 font-heading font-extrabold uppercase text-3xl md:text-5xl mb-4 md:mb-6 leading-tight">НАДЕЖНОЕ <br/>ПАРТНЕРСТВО.</h3>
-                            <p class="anim-slide-2 text-gray-400 font-light text-sm md:text-lg mb-6 leading-relaxed">Формирование надежных отношений с Заказчиками, основанных на ответственности, прозрачности и высоком качестве реализации проектов</p>
+                            <h2 class="anim-slide-2 font-heading text-htss-gold font-bold tracking-widest uppercase text-[10px] md:text-sm mb-2 md:mb-4" data-i18n="slide2_sub">Стратегия Развития</h2>
+                            <h3 class="anim-slide-2 font-heading font-extrabold uppercase text-3xl md:text-5xl mb-4 md:mb-6 leading-tight" data-i18n="slide2_title">НАДЕЖНОЕ <br/>ПАРТНЕРСТВО.</h3>
+                            <p class="anim-slide-2 text-gray-400 font-light text-sm md:text-lg mb-6 leading-relaxed" data-i18n="slide2_desc">Формирование надежных отношений с Заказчиками, основанных на ответственности, прозрачности и высоком качестве реализации проектов</p>
                         </div>
                         
-                        <!-- 3D Карусель -->
                         <div class="anim-slide-2 w-full relative z-20 flex justify-center items-center h-[280px] md:h-[450px] [perspective:1200px]">
                             <div class="carousel-card absolute w-full max-w-[480px] h-[220px] md:h-[300px] bg-[#0f172a] border border-[#1e293b] p-4 md:p-5 rounded-xl shadow-[0_0_40px_rgba(245,158,11,0.15)] flex flex-col" style="will-change: transform, opacity, filter;">
-                                <h4 class="text-gray-400 font-heading tracking-widest font-bold uppercase mb-2 text-[10px] md:text-xs">Развитие компетенций</h4>
+                                <h4 class="text-gray-400 font-heading tracking-widest font-bold uppercase mb-2 text-[10px] md:text-xs" data-i18n="chart1_title">Развитие компетенций</h4>
                                 <div class="chart-container flex-grow relative"><canvas id="growthChart"></canvas></div>
                             </div>
                             <div class="carousel-card absolute w-full max-w-[480px] h-[220px] md:h-[300px] bg-[#0f172a] border border-[#1e293b] p-4 md:p-5 rounded-xl shadow-[0_0_40px_rgba(245,158,11,0.15)] flex flex-col" style="will-change: transform, opacity, filter;">
-                                <h4 class="text-gray-400 font-heading tracking-widest font-bold uppercase mb-2 text-[10px] md:text-xs">Реализация проектов</h4>
+                                <h4 class="text-gray-400 font-heading tracking-widest font-bold uppercase mb-2 text-[10px] md:text-xs" data-i18n="chart2_title">Реализация проектов</h4>
                                 <div class="chart-container flex-grow relative"><canvas id="barChart"></canvas></div>
                             </div>
                             <div class="carousel-card absolute w-full max-w-[480px] h-[220px] md:h-[300px] bg-[#0f172a] border border-[#1e293b] p-4 md:p-5 rounded-xl shadow-[0_0_40px_rgba(245,158,11,0.15)] flex flex-col" style="will-change: transform, opacity, filter;">
-                                <h4 class="text-gray-400 font-heading tracking-widest font-bold uppercase mb-2 text-[10px] md:text-xs">Индексы эффективности</h4>
+                                <h4 class="text-gray-400 font-heading tracking-widest font-bold uppercase mb-2 text-[10px] md:text-xs" data-i18n="chart3_title">Индексы эффективности</h4>
                                 <div class="chart-container flex-grow relative"><canvas id="radarChart"></canvas></div>
                             </div>
                         </div>
@@ -220,7 +226,7 @@
                 </div>
             </div>
 
-            <!-- СЛАЙД 3: Инжиниринг -->
+            <!-- СЛАЙД 3 -->
             <div class="hero-slide" id="slide-3">
                 <div class="absolute inset-0 bg-[#172554]/85 z-0"></div>
                 <div class="absolute inset-0 opacity-5 z-0" style="background-image: linear-gradient(#fff 1px, transparent 1px), linear-gradient(90deg, #fff 1px, transparent 1px); background-size: 50px 50px;"></div>
@@ -233,16 +239,16 @@
                                 <div class="tech-ring ring-2"></div>
                                 <div class="tech-ring ring-3"></div>
                                 <div class="core"></div>
-                                <div class="tech-badge badge-1">Надежность</div>
-                                <div class="tech-badge badge-2">Качество</div>
-                                <div class="tech-badge badge-3">Инновации</div>
-                                <div class="tech-badge badge-4">Ответственность</div>
+                                <div class="tech-badge badge-1" data-i18n="badge_rel">Надежность</div>
+                                <div class="tech-badge badge-2" data-i18n="badge_qual">Качество</div>
+                                <div class="tech-badge badge-3" data-i18n="badge_inn">Инновации</div>
+                                <div class="tech-badge badge-4" data-i18n="badge_resp">Ответственность</div>
                             </div>
                         </div>
                         <div class="order-1 lg:order-2 mt-16 md:mt-0">
-                            <h2 class="anim-slide-3 font-heading text-htss-gold font-bold tracking-widest uppercase text-[10px] md:text-sm mb-2 md:mb-4">Инженерное совершенство</h2>
-                            <h3 class="anim-slide-3 font-heading font-extrabold uppercase text-3xl md:text-5xl mb-4 md:mb-6 leading-tight">КОМПЛЕКСНЫЙ <br/>ЦИКЛ РАБОТ.</h3>
-                            <p class="anim-slide-3 text-gray-400 font-light text-sm md:text-lg mb-8 leading-relaxed">В основе нашей работы современные инженерные решения, внимание к деталям и понимание задач бизнеса. Мы стремимся создавать объекты, которые соответствуют действующим нормативам, эффективно эксплуатируются и сохраняют свою ценность на протяжении многих лет.</p>
+                            <h2 class="anim-slide-3 font-heading text-htss-gold font-bold tracking-widest uppercase text-[10px] md:text-sm mb-2 md:mb-4" data-i18n="slide3_sub">Инженерное совершенство</h2>
+                            <h3 class="anim-slide-3 font-heading font-extrabold uppercase text-3xl md:text-5xl mb-4 md:mb-6 leading-tight" data-i18n="slide3_title">КОМПЛЕКСНЫЙ <br/>ЦИКЛ РАБОТ.</h3>
+                            <p class="anim-slide-3 text-gray-400 font-light text-sm md:text-lg mb-8 leading-relaxed" data-i18n="slide3_desc">В основе нашей работы современные инженерные решения, внимание к деталям и понимание задач бизнеса. Мы стремимся создавать объекты, которые соответствуют действующим нормативам, эффективно эксплуатируются и сохраняют свою ценность на протяжении многих лет.</p>
                         </div>
                     </div>
                 </div>
@@ -255,47 +261,44 @@
     <section id="about" class="pt-24 pb-20 bg-htss-dark relative border-t border-htss-border">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="bg-htss-gold rounded-2xl p-6 md:p-12 mb-16 md:mb-20 shadow-[0_0_40px_rgba(245,158,11,0.15)] relative z-20">
-                <!-- ДОБАВЛЕНО: items-start, чтобы колонки выравнивались строго по верхнему краю -->
                 <div class="grid grid-cols-2 md:grid-cols-4 gap-6 md:gap-8 text-center divide-x-0 md:divide-x divide-black/10 items-start">
                     
-                    <!-- Блок 1: EPC/EPCM -->
+                    <!-- Блок 1 -->
                     <div class="reveal-stats flex flex-col items-center px-1 md:px-3">
-                        <!-- ДОБАВЛЕНО: фиксированная высота (h-16 md:h-20). Теперь нижний текст всегда на одной линии -->
                         <div class="h-16 md:h-20 flex items-center justify-center mb-2 w-full">
                             <div class="font-heading text-xl md:text-2xl lg:text-3xl xl:text-4xl font-extrabold text-htss-dark leading-none">EPC/EPCM</div>
                         </div>
-                        <div class="font-heading text-[9px] md:text-[10px] lg:text-xs font-bold text-htss-dark/80 uppercase tracking-widest leading-relaxed">
+                        <div class="font-heading text-[9px] md:text-[10px] lg:text-xs font-bold text-htss-dark/80 uppercase tracking-widest leading-relaxed" data-i18n="stat_epc">
                             проектирование - строительство - управление
                         </div>
                     </div>
                     
-                    <!-- Блок 2: BIM & Engineering -->
+                    <!-- Блок 2 -->
                     <div class="reveal-stats flex flex-col items-center px-1 md:px-3">
                         <div class="h-16 md:h-20 flex items-center justify-center mb-2 w-full">
-                            <!-- Убран <br>, текст немного уменьшен для идеального встраивания -->
                             <div class="font-heading text-lg md:text-xl lg:text-2xl xl:text-3xl font-extrabold text-htss-dark leading-tight">BIM & Engineering</div>
                         </div>
-                        <div class="font-heading text-[9px] md:text-[10px] lg:text-xs font-bold text-htss-dark/80 uppercase tracking-widest leading-relaxed">
+                        <div class="font-heading text-[9px] md:text-[10px] lg:text-xs font-bold text-htss-dark/80 uppercase tracking-widest leading-relaxed" data-i18n="stat_bim">
                             современные цифровые технологии проектирования
                         </div>
                     </div>
                     
-                    <!-- Блок 3: 100% -->
+                    <!-- Блок 3 -->
                     <div class="reveal-stats flex flex-col items-center px-1 md:px-3">
                         <div class="h-16 md:h-20 flex items-center justify-center mb-2 w-full">
                             <div class="font-heading text-4xl md:text-5xl lg:text-5xl xl:text-6xl font-extrabold text-htss-dark leading-none"><span class="counter" data-target="100">0</span>%</div>
                         </div>
-                        <div class="font-heading text-[9px] md:text-[10px] lg:text-xs font-bold text-htss-dark/80 uppercase tracking-widest leading-relaxed">
+                        <div class="font-heading text-[9px] md:text-[10px] lg:text-xs font-bold text-htss-dark/80 uppercase tracking-widest leading-relaxed" data-i18n="stat_quality">
                             контроль качества и соблюдение сроков
                         </div>
                     </div>
                     
-                    <!-- Блок 4: 15+ -->
+                    <!-- Блок 4 -->
                     <div class="reveal-stats flex flex-col items-center px-1 md:px-3">
                         <div class="h-16 md:h-20 flex items-center justify-center mb-2 w-full">
                             <div class="font-heading text-4xl md:text-5xl lg:text-5xl xl:text-6xl font-extrabold text-htss-dark leading-none"><span class="counter" data-target="15">0</span>+</div>
                         </div>
-                        <div class="font-heading text-[9px] md:text-[10px] lg:text-xs font-bold text-htss-dark/80 uppercase tracking-widest leading-relaxed">
+                        <div class="font-heading text-[9px] md:text-[10px] lg:text-xs font-bold text-htss-dark/80 uppercase tracking-widest leading-relaxed" data-i18n="stat_exp">
                             лет совокупного опыта руководителей проекта
                         </div>
                     </div>
@@ -305,18 +308,18 @@
 
             <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center">
                 <div class="reveal-text">
-                    <h2 class="font-heading text-3xl md:text-5xl font-extrabold mb-6 md:mb-8 uppercase text-white">О нашей <span class="text-htss-gold">Компании</span></h2>
+                    <h2 class="font-heading text-3xl md:text-5xl font-extrabold mb-6 md:mb-8 uppercase text-white"><span data-i18n="about_title1">О нашей</span> <span class="text-htss-gold" data-i18n="about_title2">Компании</span></h2>
                     <div class="space-y-4 md:space-y-6 text-gray-400 font-light text-sm md:text-base leading-relaxed">
-                        <p>Команда <strong class="text-white font-medium">Hi-Tech Smart Solutions</strong> объединяет специалистов в области проектирования, строительства и инженерных систем.</p>
-                        <p>Мы рассматриваем каждый объект как комплексную инженерную задачу, где важны точность проектных решений, грамотная организация работ и ответственность за конечный результат. Мы берем на себя полный цикл работ от разработки концепции до сдачи готового объекта.</p>
+                        <p data-i18n="about_p1">Команда <strong class="text-white font-medium">Hi-Tech Smart Solutions</strong> объединяет специалистов в области проектирования, строительства и инженерных систем.</p>
+                        <p data-i18n="about_p2">Мы рассматриваем каждый объект как комплексную инженерную задачу, где важны точность проектных решений, грамотная организация работ и ответственность за конечный результат. Мы берем на себя полный цикл работ от разработки концепции до сдачи готового объекта.</p>
                         
                         <div class="pt-6 border-t border-htss-border mt-6 md:mt-8 flex items-center space-x-4 md:space-x-6">
                             <div class="flex-shrink-0">
                                 <svg class="w-10 h-10 md:w-12 md:h-12 text-htss-gold" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138 3.42 3.42 0 00-.806-1.946 3.42 3.42 0 010-4.438 3.42 3.42 0 00.806-1.946 3.42 3.42 0 013.138-3.138z"></path></svg>
                             </div>
                             <div>
-                                <h4 class="font-heading font-bold text-white text-base md:text-lg uppercase tracking-wide">Надежный партнер</h4>
-                                <p class="text-xs md:text-sm text-gray-500 font-light">Гарантия качества, соблюдение сроков и прозрачность взаимодействия.</p>
+                                <h4 class="font-heading font-bold text-white text-base md:text-lg uppercase tracking-wide" data-i18n="about_partner_title">Надежный партнер</h4>
+                                <p class="text-xs md:text-sm text-gray-500 font-light" data-i18n="about_partner_desc">Гарантия качества, соблюдение сроков и прозрачность взаимодействия.</p>
                             </div>
                         </div>
                     </div>
@@ -334,8 +337,8 @@
     <section id="philosophy" class="py-20 md:py-24 bg-htss-gray relative border-t border-htss-border">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="text-center max-w-3xl mx-auto mb-12 md:mb-16 reveal-text">
-                <h2 class="font-heading text-3xl md:text-5xl font-extrabold mb-4 md:mb-6 uppercase text-white">Наша Философия и Миссия</h2>
-                <p class="text-gray-400 font-light text-sm md:text-lg">Проектирование определяет результат. Каждый успешный проект начинается с грамотного инженерного решения</p>
+                <h2 class="font-heading text-3xl md:text-5xl font-extrabold mb-4 md:mb-6 uppercase text-white" data-i18n="phil_title">Наша Философия и Миссия</h2>
+                <p class="text-gray-400 font-light text-sm md:text-lg" data-i18n="phil_desc">Проектирование определяет результат. Каждый успешный объект начинается с грамотного инженерного решения.</p>
             </div>
             
             <div class="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8">
@@ -343,24 +346,24 @@
                     <div class="w-14 h-14 md:w-16 md:h-16 rounded-full bg-htss-gold/10 flex items-center justify-center mb-4 md:mb-6">
                         <svg class="w-7 h-7 md:w-8 md:h-8 text-htss-gold" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"></path></svg>
                     </div>
-                    <h3 class="font-heading text-base md:text-lg font-bold text-white uppercase tracking-wide mb-3 md:mb-4">Проектировать с учетом будущего</h3>
-                    <p class="text-gray-400 text-xs md:text-sm font-light leading-relaxed">Мы создаем инженерные решения, которые обеспечивают надежность, функциональность и экономическую эффективность объектов на всех этапах их жизненного цикла.</p>
+                    <h3 class="font-heading text-base md:text-lg font-bold text-white uppercase tracking-wide mb-3 md:mb-4" data-i18n="phil_card1_title">Проектировать с учетом будущего</h3>
+                    <p class="text-gray-400 text-xs md:text-sm font-light leading-relaxed" data-i18n="phil_card1_desc">Мы создаем инженерные решения, которые обеспечивают надежность, функциональность и экономическую эффективность объектов на всех этапах их жизненного цикла.</p>
                 </div>
 
                 <div class="reveal-card bg-[#172554] p-6 md:p-8 rounded-xl border border-[#1e293b] flex flex-col items-center text-center">
                     <div class="w-14 h-14 md:w-16 md:h-16 rounded-full bg-htss-gold/10 flex items-center justify-center mb-4 md:mb-6">
                         <svg class="w-7 h-7 md:w-8 md:h-8 text-htss-gold" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 002-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"></path></svg>
                     </div>
-                    <h3 class="font-heading text-base md:text-lg font-bold text-white uppercase tracking-wide mb-3 md:mb-4">Реализовывать проекты комплексно</h3>
-                    <p class="text-gray-400 text-xs md:text-sm font-light leading-relaxed">Берем на себя полный цикл работ от разработки концепции и проектирования до строительства, инженерного оснащения и ввода объекта в эксплуатацию.</p>
+                    <h3 class="font-heading text-base md:text-lg font-bold text-white uppercase tracking-wide mb-3 md:mb-4" data-i18n="phil_card2_title">Реализовывать проекты комплексно</h3>
+                    <p class="text-gray-400 text-xs md:text-sm font-light leading-relaxed" data-i18n="phil_card2_desc">Берем на себя полный цикл работ от разработки концепции и проектирования до строительства, инженерного оснащения и ввода объекта в эксплуатацию.</p>
                 </div>
 
                 <div class="reveal-card bg-[#172554] p-6 md:p-8 rounded-xl border border-[#1e293b] flex flex-col items-center text-center">
                     <div class="w-14 h-14 md:w-16 md:h-16 rounded-full bg-htss-gold/10 flex items-center justify-center mb-4 md:mb-6">
                         <svg class="w-7 h-7 md:w-8 md:h-8 text-htss-gold" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"></path></svg>
                     </div>
-                    <h3 class="font-heading text-base md:text-lg font-bold text-white uppercase tracking-wide mb-3 md:mb-4">Быть надежным партнером</h3>
-                    <p class="text-gray-400 text-xs md:text-sm font-light leading-relaxed">Строим работу на принципах профессиональной ответственности, соблюдения сроков, прозрачности процессов и неизменно высокого качества исполнения.</p>
+                    <h3 class="font-heading text-base md:text-lg font-bold text-white uppercase tracking-wide mb-3 md:mb-4" data-i18n="phil_card3_title">Быть надежным партнером</h3>
+                    <p class="text-gray-400 text-xs md:text-sm font-light leading-relaxed" data-i18n="phil_card3_desc">Строим работу на принципах профессиональной ответственности, соблюдения сроков, прозрачности процессов и неизменно высокого качества исполнения.</p>
                 </div>
             </div>
         </div>
@@ -370,49 +373,69 @@
     <section id="directions" class="py-20 md:py-24 bg-htss-dark relative border-y border-htss-border">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="text-center max-w-3xl mx-auto mb-12 md:mb-16 reveal-text">
-                <h2 class="font-heading text-3xl md:text-5xl font-extrabold mb-4 md:mb-6 uppercase text-white">Основные Направления</h2>
-                <p class="text-gray-400 font-light text-sm md:text-lg">HTSS создается как инженерно-строительная компания полного цикла, способная сопровождать проекты любой сложности.</p>
+                <h2 class="font-heading text-3xl md:text-5xl font-extrabold mb-4 md:mb-6 uppercase text-white" data-i18n="dir_title">Основные Направления</h2>
+                <p class="text-gray-400 font-light text-sm md:text-lg" data-i18n="dir_desc">HTSS создается как инженерно-строительная компания полного цикла, способная сопровождать проекты любой сложности.</p>
             </div>
             
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6 h-auto lg:h-[400px]">
                 
+                <!-- Карточка 1 -->
                 <div class="direction-card reveal-card group h-[250px] lg:h-full cursor-pointer" onclick="openModal()">
                     <div class="direction-bg" style="background-image: url('https://images.unsplash.com/photo-1581094794329-c8112a89af12?q=80&w=2070&auto=format&fit=crop');"></div>
                     <div class="direction-overlay"></div>
                     <div class="direction-content">
-                        <svg class="w-8 h-8 md:w-10 md:h-10 text-htss-gold mb-3 md:mb-4 transform translate-y-4 group-hover:translate-y-0 opacity-50 group-hover:opacity-100 transition-all duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"></path></svg>
-                        <h3 class="font-heading text-lg md:text-xl uppercase font-bold text-white mb-2">Промышленные объекты</h3>
-                        <p class="text-gray-400 text-xs md:text-sm opacity-100 lg:opacity-0 lg:group-hover:opacity-100 transform translate-y-0 lg:translate-y-4 lg:group-hover:translate-y-0 transition-all duration-300">Производственные комплексы, заводы, цеха.</p>
+                        <svg class="w-8 h-8 md:w-10 md:h-10 text-htss-gold mb-3 md:mb-4 shrink-0 transform translate-y-4 group-hover:translate-y-0 opacity-50 group-hover:opacity-100 transition-all duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"></path></svg>
+                        <div class="min-h-[72px] lg:min-h-[96px] w-full flex items-start">
+                            <h3 class="font-heading text-lg md:text-xl uppercase font-bold text-white mb-2" data-i18n="dir_card1_title">Промышленные объекты</h3>
+                        </div>
+                        <div class="min-h-[48px] lg:min-h-[64px] w-full">
+                            <p class="text-gray-400 text-xs md:text-sm opacity-100 lg:opacity-0 lg:group-hover:opacity-100 transform translate-y-0 lg:translate-y-4 lg:group-hover:translate-y-0 transition-all duration-300" data-i18n="dir_card1_desc">Производственные комплексы, заводы, цеха.</p>
+                        </div>
                     </div>
                 </div>
 
+                <!-- Карточка 2 -->
                 <div class="direction-card reveal-card group h-[250px] lg:h-full cursor-pointer" onclick="openModal()">
                     <div class="direction-bg" style="background-image: url('https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?q=80&w=2070&auto=format&fit=crop');"></div>
                     <div class="direction-overlay"></div>
                     <div class="direction-content">
-                        <svg class="w-8 h-8 md:w-10 md:h-10 text-htss-gold mb-3 md:mb-4 transform translate-y-4 group-hover:translate-y-0 opacity-50 group-hover:opacity-100 transition-all duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M3 21h18M5 21V7l8-4 8 4v14M9 21v-4a2 2 0 012-2h2a2 2 0 012 2v4M10 11h.01M14 11h.01M10 15h.01M14 15h.01"></path></svg>
-                        <h3 class="font-heading text-lg md:text-xl uppercase font-bold text-white mb-2">Коммерческая недвижимость</h3>
-                        <p class="text-gray-400 text-xs md:text-sm opacity-100 lg:opacity-0 lg:group-hover:opacity-100 transform translate-y-0 lg:translate-y-4 lg:group-hover:translate-y-0 transition-all duration-300">Офисные здания, бизнес-центры, торговые объекты. Административные здания.</p>
+                        <svg class="w-8 h-8 md:w-10 md:h-10 text-htss-gold mb-3 md:mb-4 shrink-0 transform translate-y-4 group-hover:translate-y-0 opacity-50 group-hover:opacity-100 transition-all duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M3 21h18M5 21V7l8-4 8 4v14M9 21v-4a2 2 0 012-2h2a2 2 0 012 2v4M10 11h.01M14 11h.01M10 15h.01M14 15h.01"></path></svg>
+                        <div class="min-h-[72px] lg:min-h-[96px] w-full flex items-start">
+                            <h3 class="font-heading text-lg md:text-xl uppercase font-bold text-white mb-2" data-i18n="dir_card2_title">Коммерческая недвижимость</h3>
+                        </div>
+                        <div class="min-h-[48px] lg:min-h-[64px] w-full">
+                            <p class="text-gray-400 text-xs md:text-sm opacity-100 lg:opacity-0 lg:group-hover:opacity-100 transform translate-y-0 lg:translate-y-4 lg:group-hover:translate-y-0 transition-all duration-300" data-i18n="dir_card2_desc">Офисные здания, бизнес-центры, торговые объекты. Административные здания.</p>
+                        </div>
                     </div>
                 </div>
 
+                <!-- Карточка 3 -->
                 <div class="direction-card reveal-card group h-[250px] lg:h-full cursor-pointer" onclick="openModal()">
                     <div class="direction-bg" style="background-image: url('https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?q=80&w=2070&auto=format&fit=crop');"></div>
                     <div class="direction-overlay"></div>
                     <div class="direction-content">
-                        <svg class="w-8 h-8 md:w-10 md:h-10 text-htss-gold mb-3 md:mb-4 transform translate-y-4 group-hover:translate-y-0 opacity-50 group-hover:opacity-100 transition-all duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4"></path></svg>
-                        <h3 class="font-heading text-lg md:text-xl uppercase font-bold text-white mb-2">Логистическая инфраструктура</h3>
-                        <p class="text-gray-400 text-xs md:text-sm opacity-100 lg:opacity-0 lg:group-hover:opacity-100 transform translate-y-0 lg:translate-y-4 lg:group-hover:translate-y-0 transition-all duration-300">Склады, распределительные центры, терминалы.</p>
+                        <svg class="w-8 h-8 md:w-10 md:h-10 text-htss-gold mb-3 md:mb-4 shrink-0 transform translate-y-4 group-hover:translate-y-0 opacity-50 group-hover:opacity-100 transition-all duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4"></path></svg>
+                        <div class="min-h-[72px] lg:min-h-[96px] w-full flex items-start">
+                            <h3 class="font-heading text-lg md:text-xl uppercase font-bold text-white mb-2" data-i18n="dir_card3_title">Логистическая инфраструктура</h3>
+                        </div>
+                        <div class="min-h-[48px] lg:min-h-[64px] w-full">
+                            <p class="text-gray-400 text-xs md:text-sm opacity-100 lg:opacity-0 lg:group-hover:opacity-100 transform translate-y-0 lg:translate-y-4 lg:group-hover:translate-y-0 transition-all duration-300" data-i18n="dir_card3_desc">Склады, распределительные центры, терминалы.</p>
+                        </div>
                     </div>
                 </div>
 
+                <!-- Карточка 4 -->
                 <div class="direction-card reveal-card group h-[250px] lg:h-full cursor-pointer" onclick="openModal()">
                     <div class="direction-bg" style="background-image: url('https://images.unsplash.com/photo-1517048676732-d65bc937f952?q=80&w=2070&auto=format&fit=crop');"></div>
                     <div class="direction-overlay"></div>
                     <div class="direction-content">
-                        <svg class="w-8 h-8 md:w-10 md:h-10 text-htss-gold mb-3 md:mb-4 transform translate-y-4 group-hover:translate-y-0 opacity-50 group-hover:opacity-100 transition-all duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M8 14v3m4-3v3m4-3v3M3 21h18M3 10h18M3 7l9-4 9 4M4 10h16v11H4V10z"></path></svg>
-                        <h3 class="font-heading text-lg md:text-xl uppercase font-bold text-white mb-2">Инженерная инфраструктура</h3>
-                        <p class="text-gray-400 text-xs md:text-sm opacity-100 lg:opacity-0 lg:group-hover:opacity-100 transform translate-y-0 lg:translate-y-4 lg:group-hover:translate-y-0 transition-all duration-300">Наружные и внутренние инженерные сети, технические сооружения.</p>
+                        <svg class="w-8 h-8 md:w-10 md:h-10 text-htss-gold mb-3 md:mb-4 shrink-0 transform translate-y-4 group-hover:translate-y-0 opacity-50 group-hover:opacity-100 transition-all duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M8 14v3m4-3v3m4-3v3M3 21h18M3 10h18M3 7l9-4 9 4M4 10h16v11H4V10z"></path></svg>
+                        <div class="min-h-[72px] lg:min-h-[96px] w-full flex items-start">
+                            <h3 class="font-heading text-lg md:text-xl uppercase font-bold text-white mb-2" data-i18n="dir_card4_title">Инженерная инфраструктура</h3>
+                        </div>
+                        <div class="min-h-[48px] lg:min-h-[64px] w-full">
+                            <p class="text-gray-400 text-xs md:text-sm opacity-100 lg:opacity-0 lg:group-hover:opacity-100 transform translate-y-0 lg:translate-y-4 lg:group-hover:translate-y-0 transition-all duration-300" data-i18n="dir_card4_desc">Наружные и внутренние инженерные сети, технические сооружения.</p>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -423,15 +446,15 @@
     <section id="services" class="py-20 md:py-24 bg-htss-gray relative">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="text-center mb-12 md:mb-16 reveal-text">
-                <h2 class="font-heading text-3xl md:text-5xl font-bold mb-4 md:mb-6 uppercase text-white">Наши Услуги</h2>
-                <p class="text-gray-400 font-light max-w-3xl mx-auto text-sm md:text-lg">Мы предоставляем комплекс инженерно-строительных услуг, объединяя проектирование, строительство и оснащение объектов в единую систему.</p>
+                <h2 class="font-heading text-3xl md:text-5xl font-bold mb-4 md:mb-6 uppercase text-white" data-i18n="serv_title">Наши Услуги</h2>
+                <p class="text-gray-400 font-light max-w-3xl mx-auto text-sm md:text-lg" data-i18n="serv_desc">Мы предоставляем комплекс инженерно-строительных услуг, объединяя проектирование, строительство и оснащение объектов в единую систему.</p>
             </div>
             
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6">
                 <div class="reveal-card bg-[#0f172a] p-6 md:p-8 rounded-xl border border-[#1e293b] hover:border-htss-gold transition-all duration-300">
                     <svg class="w-8 h-8 md:w-10 md:h-10 text-htss-gold mb-4 md:mb-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M11 4a2 2 0 114 0v1a1 1 0 001 1h3a1 1 0 011 1v3a1 1 0 01-1 1h-1a2 2 0 100 4h1a1 1 0 011 1v3a1 1 0 01-1 1h-3a1 1 0 01-1-1v-1a2 2 0 10-4 0v1a1 1 0 01-1 1H7a1 1 0 01-1-1v-3a1 1 0 00-1-1H4a2 2 0 110-4h1a1 1 0 001-1V7a1 1 0 011-1h3a1 1 0 001-1V4z"></path></svg>
-                    <h4 class="font-heading text-base md:text-lg uppercase font-bold mb-3 text-white">Проектирование</h4>
-                    <ul class="text-gray-500 font-light text-xs md:text-sm space-y-2">
+                    <h4 class="font-heading text-base md:text-lg uppercase font-bold mb-3 text-white" data-i18n="serv_card1_title">Проектирование</h4>
+                    <ul class="text-gray-500 font-light text-xs md:text-sm space-y-2" data-i18n="serv_card1_list">
                         <li>• Архитектурное проектирование</li>
                         <li>• Конструктивные решения</li>
                         <li>• Инженерные сети</li>
@@ -441,8 +464,8 @@
                 
                 <div class="reveal-card bg-[#0f172a] p-6 md:p-8 rounded-xl border border-[#1e293b] hover:border-htss-gold transition-all duration-300">
                     <svg class="w-8 h-8 md:w-10 md:h-10 text-htss-gold mb-4 md:mb-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"></path></svg>
-                    <h4 class="font-heading text-base md:text-lg uppercase font-bold mb-3 text-white">Строительство</h4>
-                    <ul class="text-gray-500 font-light text-xs md:text-sm space-y-2">
+                    <h4 class="font-heading text-base md:text-lg uppercase font-bold mb-3 text-white" data-i18n="serv_card2_title">Строительство</h4>
+                    <ul class="text-gray-500 font-light text-xs md:text-sm space-y-2" data-i18n="serv_card2_list">
                         <li>• Генеральный подряд</li>
                         <li>• Организация строительства</li>
                         <li>• Управление проектом</li>
@@ -452,8 +475,8 @@
                 
                 <div class="reveal-card bg-[#0f172a] p-6 md:p-8 rounded-xl border border-[#1e293b] hover:border-htss-gold transition-all duration-300">
                     <svg class="w-8 h-8 md:w-10 md:h-10 text-htss-gold mb-4 md:mb-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M13 10V3L4 14h7v7l9-11h-7z"></path></svg>
-                    <h4 class="font-heading text-base md:text-lg uppercase font-bold mb-3 text-white">Инженерия</h4>
-                    <ul class="text-gray-500 font-light text-xs md:text-sm space-y-2">
+                    <h4 class="font-heading text-base md:text-lg uppercase font-bold mb-3 text-white" data-i18n="serv_card3_title">Инженерия</h4>
+                    <ul class="text-gray-500 font-light text-xs md:text-sm space-y-2" data-i18n="serv_card3_list">
                         <li>• Электроснабжение</li>
                         <li>• Вентиляция и кондиционирование</li>
                         <li>• Водоснабжение и канализация</li>
@@ -463,8 +486,8 @@
                 
                 <div class="reveal-card bg-[#0f172a] p-6 md:p-8 rounded-xl border border-[#1e293b] hover:border-htss-gold transition-all duration-300">
                     <svg class="w-8 h-8 md:w-10 md:h-10 text-htss-gold mb-4 md:mb-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"></path></svg>
-                    <h4 class="font-heading text-base md:text-lg uppercase font-bold mb-3 text-white">Комплексная реализация</h4>
-                    <ul class="text-gray-500 font-light text-xs md:text-sm space-y-2">
+                    <h4 class="font-heading text-base md:text-lg uppercase font-bold mb-3 text-white" data-i18n="serv_card4_title">Комплексная реализация</h4>
+                    <ul class="text-gray-500 font-light text-xs md:text-sm space-y-2" data-i18n="serv_card4_list">
                         <li>• Запуск производственной площадки</li>
                         <li>• Комплектация оборудованием</li>
                         <li>• Пусконаладочные работы</li>
@@ -475,7 +498,7 @@
             </div>
             
             <div class="mt-12 md:mt-16 text-center reveal-text border-t border-[#1e293b] pt-8 md:pt-12">
-                <p class="text-gray-400 font-light max-w-4xl mx-auto text-xs md:text-sm leading-relaxed">
+                <p class="text-gray-400 font-light max-w-4xl mx-auto text-xs md:text-sm leading-relaxed" data-i18n="serv_footer">
                     Один подрядчик — единая ответственность за результат. Наша цель — создавать объекты, которые полностью отвечают ожиданиям Заказчика и эффективно работают на протяжении всего срока эксплуатации.
                 </p>
             </div>
@@ -490,29 +513,29 @@
                     <div class="font-heading font-bold text-2xl md:text-3xl tracking-widest uppercase mb-4 md:mb-6 text-white">
                         HTSS <span class="text-htss-gold">& CO.</span>
                     </div>
-                    <p class="text-gray-500 font-light text-xs md:text-sm max-w-sm">
+                    <p class="text-gray-500 font-light text-xs md:text-sm max-w-sm" data-i18n="footer_desc">
                         Компания HTSS открыта к реализации новых проектов и готова стать надежным инженерным партнером для государственных и частных заказчиков.
                     </p>
                 </div>
                 <div>
-                    <h4 class="font-heading text-xs md:text-sm uppercase font-bold mb-4 md:mb-6 text-white tracking-widest">Контакты</h4>
+                    <h4 class="font-heading text-xs md:text-sm uppercase font-bold mb-4 md:mb-6 text-white tracking-widest" data-i18n="footer_contacts">Контакты</h4>
                     <ul class="text-gray-400 space-y-2 md:space-y-3 font-light text-xs md:text-sm">
                         <li><a href="tel:+77015919386" class="hover:text-htss-gold transition-colors">+7 701 591 9386</a></li>
                         <li><a href="mailto:alimbetov.ia@argun.kz" class="hover:text-htss-gold transition-colors">alimbetov.ia@argun.kz</a></li>
-                        <li>г. Астана, Республика Казахстан</li>
+                        <li data-i18n="footer_address">г. Астана, Республика Казахстан</li>
                     </ul>
                 </div>
                 <div>
-                    <h4 class="font-heading text-xs md:text-sm uppercase font-bold mb-4 md:mb-6 text-white tracking-widest">Сотрудничество</h4>
+                    <h4 class="font-heading text-xs md:text-sm uppercase font-bold mb-4 md:mb-6 text-white tracking-widest" data-i18n="footer_collab">Сотрудничество</h4>
                     <button onclick="openModal()" class="group flex items-center space-x-3 text-htss-gold hover:text-white transition-colors">
-                        <span class="font-bold uppercase tracking-wider text-[10px] md:text-xs">Оставить заявку</span>
+                        <span class="font-bold uppercase tracking-wider text-[10px] md:text-xs" data-i18n="footer_btn">Оставить заявку</span>
                         <span class="w-6 h-6 rounded-full border border-htss-gold flex items-center justify-center group-hover:bg-htss-gold transition-colors">→</span>
                     </button>
                 </div>
             </div>
             <div class="border-t border-htss-border pt-6 flex flex-col md:flex-row justify-between items-center text-[9px] md:text-[10px] text-gray-600 uppercase tracking-widest font-bold">
-                <p class="mb-4 md:mb-0">&copy; 2026 HTSS. Все права защищены.</p>
-                <p>Проектируем. Создаем. Реализуем.</p>
+                <p class="mb-4 md:mb-0" data-i18n="footer_copy">&copy; 2026 HTSS. Все права защищены.</p>
+                <p data-i18n="footer_slogan">Проектируем. Создаем. Реализуем.</p>
             </div>
         </div>
     </footer>
@@ -523,32 +546,172 @@
             <button onclick="closeModal()" class="absolute top-4 right-4 md:top-6 md:right-6 text-gray-500 hover:text-white transition-colors">
                 <svg class="w-6 h-6 md:w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M6 18L18 6M6 6l12 12"></path></svg>
             </button>
-            <h3 class="font-heading text-xl md:text-3xl uppercase font-extrabold mb-2 md:mb-3 text-white">Обсудить проект</h3>
-            <p class="text-gray-400 font-light mb-6 md:mb-8 text-xs md:text-sm">Оставьте контакты, и главный инженер свяжется с вами для первичной консультации.</p>
+            <h3 class="font-heading text-xl md:text-3xl uppercase font-extrabold mb-2 md:mb-3 text-white" data-i18n="modal_title">Обсудить проект</h3>
+            <p class="text-gray-400 font-light mb-6 md:mb-8 text-xs md:text-sm" data-i18n="modal_desc">Оставьте контакты, и главный инженер свяжется с вами для первичной консультации.</p>
             
             <form onsubmit="event.preventDefault(); closeModal(); alert('Заявка отправлена!');">
                 <div class="space-y-4 md:space-y-6">
                     <div>
-                        <input type="text" required class="w-full bg-transparent border-b border-gray-700 py-2 md:py-3 text-white focus:outline-none focus:border-htss-gold transition-colors placeholder-gray-500 font-light text-sm" placeholder="Ваше имя">
+                        <input type="text" required class="w-full bg-transparent border-b border-gray-700 py-2 md:py-3 text-white focus:outline-none focus:border-htss-gold transition-colors placeholder-gray-500 font-light text-sm" data-i18n-placeholder="modal_name" placeholder="Ваше имя">
                     </div>
                     <div>
-                        <input type="tel" required class="w-full bg-transparent border-b border-gray-700 py-2 md:py-3 text-white focus:outline-none focus:border-htss-gold transition-colors placeholder-gray-500 font-light text-sm" placeholder="Номер телефона">
+                        <input type="tel" required class="w-full bg-transparent border-b border-gray-700 py-2 md:py-3 text-white focus:outline-none focus:border-htss-gold transition-colors placeholder-gray-500 font-light text-sm" data-i18n-placeholder="modal_phone" placeholder="Номер телефона">
                     </div>
                     <div>
-                        <select class="w-full bg-transparent border-b border-gray-700 py-2 md:py-3 text-white focus:outline-none focus:border-htss-gold transition-colors placeholder-gray-500 font-light appearance-none cursor-pointer text-sm">
-                            <option value="" disabled selected class="text-gray-500">Направление проекта</option>
-                            <option value="prom" class="bg-htss-dark text-white">Промышленное строительство</option>
-                            <option value="comm" class="bg-htss-dark text-white">Коммерческая недвижимость</option>
-                            <option value="log" class="bg-htss-dark text-white">Логистические центры</option>
+                        <select class="w-full bg-transparent border-b border-gray-700 py-2 md:py-3 text-white focus:outline-none focus:border-htss-gold transition-colors font-light appearance-none cursor-pointer text-sm">
+                            <option value="" disabled selected class="text-gray-500" data-i18n="modal_sel_default">Направление проекта</option>
+                            <option value="prom" class="bg-htss-dark text-white" data-i18n="modal_sel_1">Промышленное строительство</option>
+                            <option value="comm" class="bg-htss-dark text-white" data-i18n="modal_sel_2">Коммерческая недвижимость</option>
+                            <option value="log" class="bg-htss-dark text-white" data-i18n="modal_sel_3">Логистические центры</option>
                         </select>
                     </div>
                 </div>
-                <button type="submit" class="font-heading mt-8 md:mt-10 w-full bg-htss-gold hover:bg-yellow-600 text-white font-bold tracking-widest uppercase py-3 md:py-4 rounded-xl transition-all text-[10px] md:text-xs">
+                <button type="submit" class="font-heading mt-8 md:mt-10 w-full bg-htss-gold hover:bg-yellow-600 text-white font-bold tracking-widest uppercase py-3 md:py-4 rounded-xl transition-all text-[10px] md:text-xs" data-i18n="modal_btn">
                     Отправить заявку
                 </button>
             </form>
         </div>
     </div>
+
+    <!-- JS Скрипты локализации (i18n) -->
+    <script>
+        const translations = {
+            ru: {
+                nav_about: "О компании", nav_approach: "Подход", nav_sectors: "Направления", nav_services: "Услуги", btn_request: "Оставить заявку",
+                hero_title1: "ПРОЕКТИРУЕМ.", hero_title2: "СОЗДАЕМ.", hero_title3: "РЕАЛИЗУЕМ.",
+                hero_desc: "Инженерно-строительная компания, специализирующаяся на проектировании, строительстве и комплексной реализации объектов различного назначения.",
+                hero_btn: "Получить консультацию", scroll_down: "Скролл вниз",
+                slide2_sub: "Стратегия Развития", slide2_title: "НАДЕЖНОЕ <br/>ПАРТНЕРСТВО.", slide2_desc: "Формирование надежных отношений с Заказчиками, основанных на ответственности, прозрачности и высоком качестве реализации проектов.",
+                chart1_title: "Развитие компетенций", chart2_title: "Реализация проектов", chart3_title: "Индексы эффективности",
+                badge_rel: "Надежность", badge_qual: "Качество", badge_inn: "Инновации", badge_resp: "Ответственность",
+                slide3_sub: "Инженерное совершенство", slide3_title: "КОМПЛЕКСНЫЙ <br/>ЦИКЛ РАБОТ.", slide3_desc: "В основе нашей работы современные инженерные решения, внимание к деталям и понимание задач бизнеса. Мы стремимся создавать объекты, которые соответствуют действующим нормативам, эффективно эксплуатируются и сохраняют свою ценность на протяжении многих лет.",
+                stat_epc: "проектирование - строительство - управление", stat_bim: "современные цифровые технологии проектирования", stat_quality: "контроль качества и соблюдение сроков", stat_exp: "лет совокупного опыта руководителей проекта",
+                about_title1: "О нашей", about_title2: "Компании",
+                about_p1: "Команда <strong class='text-white font-medium'>Hi-Tech Smart Solutions</strong> объединяет специалистов в области проектирования, строительства и инженерных систем.",
+                about_p2: "Мы рассматриваем каждый объект как комплексную инженерную задачу, где важны точность проектных решений, грамотная организация работ и ответственность за конечный результат. Мы берем на себя полный цикл работ от разработки концепции до сдачи готового объекта.",
+                about_partner_title: "Надежный партнер", about_partner_desc: "Гарантия качества, соблюдение сроков и прозрачность взаимодействия.",
+                phil_title: "Наша Философия и Миссия", phil_desc: "Проектирование определяет результат. Каждый успешный объект начинается с грамотного инженерного решения.",
+                phil_card1_title: "Проектировать с учетом будущего", phil_card1_desc: "Мы создаем инженерные решения, которые обеспечивают надежность, функциональность и экономическую эффективность объектов на всех этапах их жизненного цикла.",
+                phil_card2_title: "Реализовывать проекты комплексно", phil_card2_desc: "Берем на себя полный цикл работ от разработки концепции и проектирования до строительства, инженерного оснащения и ввода объекта в эксплуатацию.",
+                phil_card3_title: "Быть надежным партнером", phil_card3_desc: "Строим работу на принципах профессиональной ответственности, соблюдения сроков, прозрачности процессов и неизменно высокого качества исполнения.",
+                dir_title: "Основные Направления", dir_desc: "HTSS создается как инженерно-строительная компания полного цикла, способная сопровождать проекты любой сложности.",
+                dir_card1_title: "Промышленные объекты", dir_card1_desc: "Производственные комплексы, заводы, цеха.",
+                dir_card2_title: "Коммерческая недвижимость", dir_card2_desc: "Офисные здания, бизнес-центры, торговые объекты. Административные здания.",
+                dir_card3_title: "Логистическая инфраструктура", dir_card3_desc: "Склады, распределительные центры, терминалы.",
+                dir_card4_title: "Инженерная инфраструктура", dir_card4_desc: "Наружные и внутренние инженерные сети, технические сооружения.",
+                serv_title: "Наши Услуги", serv_desc: "Мы предоставляем комплекс инженерно-строительных услуг, объединяя проектирование, строительство и оснащение объектов в единую систему.",
+                serv_card1_title: "Проектирование", serv_card1_list: "<li>• Архитектурное проектирование</li><li>• Конструктивные решения</li><li>• Инженерные сети</li><li>• Рабочая документация</li>",
+                serv_card2_title: "Строительство", serv_card2_list: "<li>• Генеральный подряд</li><li>• Организация строительства</li><li>• Управление проектом</li><li>• Технический надзор</li>",
+                serv_card3_title: "Инженерия", serv_card3_list: "<li>• Электроснабжение</li><li>• Вентиляция и кондиционирование</li><li>• Водоснабжение и канализация</li><li>• Системы безопасности</li>",
+                serv_card4_title: "Комплексная реализация", serv_card4_list: "<li>• Запуск производственной площадки</li><li>• Комплектация оборудованием</li><li>• Пусконаладочные работы</li><li>• Ввод в эксплуатацию</li><li>• Гарантийное сопровождение</li>",
+                serv_footer: "Один подрядчик — единая ответственность за результат. Наша цель — создавать объекты, которые полностью отвечают ожиданиям Заказчика и эффективно работают на протяжении всего срока эксплуатации.",
+                footer_desc: "Компания HTSS открыта к реализации новых проектов и готова стать надежным инженерным партнером для государственных и частных заказчиков.",
+                footer_contacts: "Контакты", footer_address: "г. Астана, Республика Казахстан", footer_collab: "Сотрудничество", footer_btn: "Оставить заявку", footer_copy: "&copy; 2026 HTSS. Все права защищены.", footer_slogan: "Проектируем. Создаем. Реализуем.",
+                modal_title: "Обсудить проект", modal_desc: "Оставьте контакты, и главный инженер свяжется с вами для первичной консультации.",
+                modal_name: "Ваше имя", modal_phone: "Номер телефона", modal_sel_default: "Направление проекта", modal_sel_1: "Промышленное строительство", modal_sel_2: "Коммерческая недвижимость", modal_sel_3: "Логистические центры", modal_btn: "Отправить заявку"
+            },
+            kk: {
+                nav_about: "Компания туралы", nav_approach: "Тәсіл", nav_sectors: "Бағыттар", nav_services: "Қызметтер", btn_request: "Өтінім қалдыру",
+                hero_title1: "ЖОБАЛАЙМЫЗ.", hero_title2: "ЖАСАЙМЫЗ.", hero_title3: "ЖҮЗЕГЕ АСЫРАМЫЗ.",
+                hero_desc: "Әртүрлі мақсаттағы нысандарды жобалауға, салуға және кешенді жүзеге асыруға маманданған инженерлік-құрылыс компаниясы.",
+                hero_btn: "Кеңес алу", scroll_down: "Төмен айналдыру",
+                slide2_sub: "Даму Стратегиясы", slide2_title: "СЕНІМДІ <br/>СЕРІКТЕСТІК.", slide2_desc: "Тапсырыс берушілермен жауапкершілік, ашықтық және жобаларды іске асырудың жоғары сапасына негізделген сенімді қарым-қатынастарды қалыптастыру.",
+                chart1_title: "Құзыреттерді дамыту", chart2_title: "Жобаларды іске асыру", chart3_title: "Тиімділік индекстері",
+                badge_rel: "Сенімділік", badge_qual: "Сапа", badge_inn: "Инновациялар", badge_resp: "Жауапкершілік",
+                slide3_sub: "Инженерлік кемелдік", slide3_title: "КЕШЕНДІ <br/>ЖҰМЫС ЦИКЛІ.", slide3_desc: "Біздің жұмысымыздың негізінде заманауи инженерлік шешімдер, бөлшектерге назар аудару және бизнес міндеттерін түсіну жатыр. Біз қолданыстағы нормативтерге сәйкес келетін, тиімді пайдаланылатын және көптеген жылдар бойы өз құндылығын сақтайтын нысандар құруға ұмтыламыз.",
+                stat_epc: "жобалау - құрылыс - басқару", stat_bim: "заманауи цифрлық жобалау технологиялары", stat_quality: "сапаны бақылау және мерзімдерді сақтау", stat_exp: "жоба жетекшілерінің жиынтық жұмыс өтілі",
+                about_title1: "Біздің", about_title2: "Компания",
+                about_p1: "<strong class='text-white font-medium'>Hi-Tech Smart Solutions</strong> командасы жобалау, құрылыс және инженерлік жүйелер саласындағы мамандарды біріктіреді.",
+                about_p2: "Біз әрбір нысанды жобалық шешімдердің дәлдігі, жұмысты сауатты ұйымдастыру және түпкілікті нәтижеге жауапкершілік маңызды болатын кешенді инженерлік міндет ретінде қарастырамыз. Біз тұжырымдаманы әзірлеуден бастап дайын нысанды тапсыруға дейінгі толық жұмыс циклін өз мойнымызға аламыз.",
+                about_partner_title: "Сенімді серіктес", about_partner_desc: "Сапа кепілдігі, мерзімдерді сақтау және өзара іс-қимылдың ашықтығы.",
+                phil_title: "Біздің Философиямыз бен Миссиямыз", phil_desc: "Жобалау нәтижені анықтайды. Әрбір табысты нысан сауатты инженерлік шешімнен басталады.",
+                phil_card1_title: "Болашақты ескере отырып жобалау", phil_card1_desc: "Біз нысандардың өмірлік циклінің барлық кезеңдерінде сенімділікті, функционалдылықты және экономикалық тиімділікті қамтамасыз ететін инженерлік шешімдерді жасаймыз.",
+                phil_card2_title: "Жобаларды кешенді жүзеге асыру", phil_card2_desc: "Біз тұжырымдаманы әзірлеу мен жобалаудан бастап құрылысқа, инженерлік жабдықтауға және нысанды пайдалануға беруге дейінгі толық жұмыс циклін өз мойнымызға аламыз.",
+                phil_card3_title: "Сенімді серіктес болу", phil_card3_desc: "Біз жұмысты кәсіби жауапкершілік, мерзімдерді сақтау, процестердің ашықтығы және орындаудың тұрақты жоғары сапасы қағидаттарына құрамыз.",
+                dir_title: "Негізгі Бағыттар", dir_desc: "HTSS кез келген күрделіліктегі жобаларды сүйемелдеуге қабілетті толық циклді инженерлік-құрылыс компаниясы ретінде құрылады.",
+                dir_card1_title: "Өнеркәсіптік нысандар", dir_card1_desc: "Өндірістік кешендер, зауыттар, цехтар.",
+                dir_card2_title: "Коммерциялық жылжымайтын мүлік", dir_card2_desc: "Кеңсе ғимараттары, бизнес-орталықтар, сауда нысандары. Әкімшілік ғимараттар.",
+                dir_card3_title: "Логистикалық инфрақұрылым", dir_card3_desc: "Қоймалар, тарату орталықтары, терминалдар.",
+                dir_card4_title: "Инженерлік инфрақұрылым", dir_card4_desc: "Сыртқы және ішкі инженерлік желілер, техникалық құрылыстар.",
+                serv_title: "Біздің Қызметтер", serv_desc: "Біз жобалау, құрылыс және нысандарды жабдықтауды біртұтас жүйеге біріктіре отырып, инженерлік-құрылыс қызметтерінің кешенін ұсынамыз.",
+                serv_card1_title: "Жобалау", serv_card1_list: "<li>• Сәулеттік жобалау</li><li>• Конструктивті шешімдер</li><li>• Инженерлік желілер</li><li>• Жұмыс құжаттамасы</li>",
+                serv_card2_title: "Құрылыс", serv_card2_list: "<li>• Бас мердігерлік</li><li>• Құрылысты ұйымдастыру</li><li>• Жобаны басқару</li><li>• Техникалық қадағалау</li>",
+                serv_card3_title: "Инженерия", serv_card3_list: "<li>• Электрмен жабдықтау</li><li>• Желдету және ауаны баптау</li><li>• Сумен жабдықтау және кәріз</li><li>• Қауіпсіздік жүйелері</li>",
+                serv_card4_title: "Кешенді іске асыру", serv_card4_list: "<li>• Өндірістік алаңды іске қосу</li><li>• Жабдықтармен жинақтау</li><li>• Іске қосу-баптау жұмыстары</li><li>• Пайдалануға беру</li><li>• Кепілдікті сүйемелдеу</li>",
+                serv_footer: "Бір мердігер — нәтиже үшін бірыңғай жауапкершілік. Біздің мақсатымыз — Тапсырыс берушінің күтулеріне толық жауап беретін және бүкіл пайдалану мерзімі ішінде тиімді жұмыс істейтін нысандар құру.",
+                footer_desc: "HTSS компаниясы жаңа жобаларды іске асыруға ашық және мемлекеттік және жеке тапсырыс берушілер үшін сенімді инженерлік серіктес болуға дайын.",
+                footer_contacts: "Байланыстар", footer_address: "Астана қ., Қазақстан Республикасы", footer_collab: "Ынтымақтастық", footer_btn: "Өтінім қалдыру", footer_copy: "&copy; 2026 HTSS. Барлық құқықтар қорғалған.", footer_slogan: "Жобалаймыз. Жасаймыз. Жүзеге асырамыз.",
+                modal_title: "Жобаны талқылау", modal_desc: "Байланыс мәліметтеріңізді қалдырыңыз, бас инженер бастапқы кеңес беру үшін сізбен хабарласады.",
+                modal_name: "Сіздің атыңыз", modal_phone: "Телефон нөмірі", modal_sel_default: "Жоба бағыты", modal_sel_1: "Өнеркәсіптік құрылыс", modal_sel_2: "Коммерциялық жылжымайтын мүлік", modal_sel_3: "Логистикалық орталықтар", modal_btn: "Өтінімді жіберу"
+            },
+            en: {
+                nav_about: "About Us", nav_approach: "Approach", nav_sectors: "Sectors", nav_services: "Services", btn_request: "Leave a Request",
+                hero_title1: "DESIGN.", hero_title2: "BUILD.", hero_title3: "REALIZE.",
+                hero_desc: "An engineering and construction company specializing in the design, construction, and comprehensive implementation of various facilities.",
+                hero_btn: "Get a Consultation", scroll_down: "Scroll Down",
+                slide2_sub: "Development Strategy", slide2_title: "RELIABLE <br/>PARTNERSHIP.", slide2_desc: "Building reliable relationships with Clients based on responsibility, transparency, and high quality of project execution.",
+                chart1_title: "Competence Development", chart2_title: "Project Implementation", chart3_title: "Efficiency Indices",
+                badge_rel: "Reliability", badge_qual: "Quality", badge_inn: "Innovation", badge_resp: "Responsibility",
+                slide3_sub: "Engineering Excellence", slide3_title: "COMPREHENSIVE <br/>WORK CYCLE.", slide3_desc: "Our work is based on modern engineering solutions, attention to detail, and an understanding of business tasks. We strive to create facilities that comply with current regulations, operate efficiently, and retain their value for many years.",
+                stat_epc: "design - construction - management", stat_bim: "modern digital design technologies", stat_quality: "quality control and strict deadlines", stat_exp: "years of combined experience of project managers",
+                about_title1: "About Our", about_title2: "Company",
+                about_p1: "The <strong class='text-white font-medium'>Hi-Tech Smart Solutions</strong> team brings together specialists in the field of design, construction, and engineering systems.",
+                about_p2: "We view every object as a complex engineering task, where precision of design solutions, competent organization of work, and responsibility for the final result are paramount. We handle the entire cycle of work, from concept development to handing over the finished facility.",
+                about_partner_title: "Reliable Partner", about_partner_desc: "Quality assurance, adherence to deadlines, and transparent interaction.",
+                phil_title: "Our Philosophy and Mission", phil_desc: "Design determines the result. Every successful project begins with a sound engineering solution.",
+                phil_card1_title: "Design with the future in mind", phil_card1_desc: "We create engineering solutions that ensure reliability, functionality, and economic efficiency of facilities at all stages of their life cycle.",
+                phil_card2_title: "Implement projects comprehensively", phil_card2_desc: "We undertake the full cycle of work from concept development and design to construction, engineering equipment, and commissioning of the facility.",
+                phil_card3_title: "Be a reliable partner", phil_card3_desc: "We build our work on the principles of professional responsibility, meeting deadlines, process transparency, and consistently high quality of execution.",
+                dir_title: "Core Sectors", dir_desc: "HTSS is established as a full-cycle engineering and construction company capable of supporting projects of any complexity.",
+                dir_card1_title: "Industrial Facilities", dir_card1_desc: "Production complexes, factories, workshops.",
+                dir_card2_title: "Commercial Real Estate", dir_card2_desc: "Office buildings, business centers, retail facilities. Administrative buildings.",
+                dir_card3_title: "Logistics Infrastructure", dir_card3_desc: "Warehouses, distribution centers, terminals.",
+                dir_card4_title: "Engineering Infrastructure", dir_card4_desc: "External and internal engineering networks, technical structures.",
+                serv_title: "Our Services", serv_desc: "We provide a comprehensive range of engineering and construction services, integrating design, construction, and facility equipment into a single system.",
+                serv_card1_title: "Design", serv_card1_list: "<li>• Architectural design</li><li>• Structural solutions</li><li>• Engineering networks</li><li>• Working documentation</li>",
+                serv_card2_title: "Construction", serv_card2_list: "<li>• General contracting</li><li>• Organization of construction</li><li>• Project management</li><li>• Technical supervision</li>",
+                serv_card3_title: "Engineering", serv_card3_list: "<li>• Power supply</li><li>• Ventilation and air conditioning</li><li>• Water supply and sewerage</li><li>• Security systems</li>",
+                serv_card4_title: "Comprehensive Implementation", serv_card4_list: "<li>• Production site launch</li><li>• Equipment procurement</li><li>• Commissioning works</li><li>• Putting into operation</li><li>• Warranty support</li>",
+                serv_footer: "One contractor — single responsibility for the result. Our goal is to create facilities that fully meet Customer expectations and operate efficiently throughout their entire service life.",
+                footer_desc: "HTSS is open to implementing new projects and is ready to become a reliable engineering partner for public and private customers.",
+                footer_contacts: "Contacts", footer_address: "Astana, Republic of Kazakhstan", footer_collab: "Collaboration", footer_btn: "Leave a Request", footer_copy: "&copy; 2026 HTSS. All rights reserved.", footer_slogan: "Design. Build. Realize.",
+                modal_title: "Discuss a Project", modal_desc: "Leave your contacts, and our chief engineer will contact you for an initial consultation.",
+                modal_name: "Your Name", modal_phone: "Phone Number", modal_sel_default: "Project Sector", modal_sel_1: "Industrial Construction", modal_sel_2: "Commercial Real Estate", modal_sel_3: "Logistics Centers", modal_btn: "Submit Request"
+            }
+        };
+
+        function setLanguage(lang) {
+            // Замена текстового контента
+            document.querySelectorAll('[data-i18n]').forEach(el => {
+                const key = el.getAttribute('data-i18n');
+                if (translations[lang] && translations[lang][key]) {
+                    el.innerHTML = translations[lang][key];
+                }
+            });
+            // Замена плейсхолдеров
+            document.querySelectorAll('[data-i18n-placeholder]').forEach(el => {
+                const key = el.getAttribute('data-i18n-placeholder');
+                if (translations[lang] && translations[lang][key]) {
+                    el.setAttribute('placeholder', translations[lang][key]);
+                }
+            });
+            // Подсветка активной кнопки языка
+            document.querySelectorAll('.lang-btn').forEach(btn => {
+                btn.classList.remove('text-htss-gold');
+                if (btn.getAttribute('data-lang') === lang) btn.classList.add('text-htss-gold');
+            });
+            
+            // Сохранение выбора в память браузера
+            localStorage.setItem('htss_lang', lang);
+            document.documentElement.lang = lang === 'kk' ? 'kk' : (lang === 'en' ? 'en' : 'ru');
+        }
+
+        // При загрузке страницы проверяем язык
+        document.addEventListener("DOMContentLoaded", () => {
+            const savedLang = localStorage.getItem('htss_lang') || 'ru';
+            setLanguage(savedLang);
+        });
+    </script>
 
     <!-- JS Скрипты -->
     <script>
