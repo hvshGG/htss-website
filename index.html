@@ -104,7 +104,7 @@
             <div class="flex items-center justify-between h-16 md:h-20 transition-all" id="nav-inner">
                 
                 <!-- Логотип -->
-                <div class="flex-shrink-0 font-heading font-bold text-xl md:text-2xl tracking-widest uppercase cursor-pointer nav-link" data-target="#hero-scroller">
+                <div class="flex-shrink-0 font-heading font-bold text-2xl md:text-4xl tracking-widest uppercase cursor-pointer nav-link" data-target="#hero-scroller">
                     HTSS <span class="text-htss-gold">& CO.</span>
                 </div>
 
@@ -160,8 +160,8 @@
                 
                 <div class="relative z-20 w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-20 md:pt-0">
                     <div class="max-w-3xl">
-                        <div class="text-mask mb-4">
-                            <h2 class="text-mask-inner font-heading text-htss-gold font-bold tracking-widest uppercase text-[10px] md:text-sm">
+                        <div class="text-mask mb-4 md:mb-6">
+                            <h2 class="text-mask-inner font-heading text-htss-gold font-bold tracking-widest uppercase text-sm md:text-xl">
                                 Hi-Tech Smart Solutions
                             </h2>
                         </div>
@@ -198,7 +198,7 @@
                         <div>
                             <h2 class="anim-slide-2 font-heading text-htss-gold font-bold tracking-widest uppercase text-[10px] md:text-sm mb-2 md:mb-4">Стратегия Развития</h2>
                             <h3 class="anim-slide-2 font-heading font-extrabold uppercase text-3xl md:text-5xl mb-4 md:mb-6 leading-tight">НАДЕЖНОЕ <br/>ПАРТНЕРСТВО.</h3>
-                            <p class="anim-slide-2 text-gray-400 font-light text-sm md:text-lg mb-6 leading-relaxed">Формирование надежных отношений с Заказчиками, основанных на ответственности, прозрачности и высоком качестве реализации проектов.</p>
+                            <p class="anim-slide-2 text-gray-400 font-light text-sm md:text-lg mb-6 leading-relaxed">Формирование надежных отношений с Заказчиками, основанных на ответственности, прозрачности и высоком качестве реализации проектов</p>
                         </div>
                         
                         <!-- 3D Карусель -->
@@ -255,23 +255,51 @@
     <section id="about" class="pt-24 pb-20 bg-htss-dark relative border-t border-htss-border">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="bg-htss-gold rounded-2xl p-6 md:p-12 mb-16 md:mb-20 shadow-[0_0_40px_rgba(245,158,11,0.15)] relative z-20">
-                <div class="grid grid-cols-2 md:grid-cols-4 gap-6 md:gap-8 text-center divide-x-0 md:divide-x divide-black/10">
-                    <div class="reveal-stats">
-                        <div class="font-heading text-3xl md:text-5xl font-extrabold text-htss-dark mb-1 md:mb-2"><span class="counter" data-target="15">0</span>+</div>
-                        <div class="font-heading text-[9px] md:text-xs font-bold text-htss-dark/80 uppercase tracking-widest">Лет экспертизы</div>
+                <!-- ДОБАВЛЕНО: items-start, чтобы колонки выравнивались строго по верхнему краю -->
+                <div class="grid grid-cols-2 md:grid-cols-4 gap-6 md:gap-8 text-center divide-x-0 md:divide-x divide-black/10 items-start">
+                    
+                    <!-- Блок 1: EPC/EPCM -->
+                    <div class="reveal-stats flex flex-col items-center px-1 md:px-3">
+                        <!-- ДОБАВЛЕНО: фиксированная высота (h-16 md:h-20). Теперь нижний текст всегда на одной линии -->
+                        <div class="h-16 md:h-20 flex items-center justify-center mb-2 w-full">
+                            <div class="font-heading text-xl md:text-2xl lg:text-3xl xl:text-4xl font-extrabold text-htss-dark leading-none">EPC/EPCM</div>
+                        </div>
+                        <div class="font-heading text-[9px] md:text-[10px] lg:text-xs font-bold text-htss-dark/80 uppercase tracking-widest leading-relaxed">
+                            проектирование - строительство - управление
+                        </div>
                     </div>
-                    <div class="reveal-stats">
-                        <div class="font-heading text-3xl md:text-5xl font-extrabold text-htss-dark mb-1 md:mb-2"><span class="counter" data-target="120">0</span>+</div>
-                        <div class="font-heading text-[9px] md:text-xs font-bold text-htss-dark/80 uppercase tracking-widest">Успешных проектов</div>
+                    
+                    <!-- Блок 2: BIM & Engineering -->
+                    <div class="reveal-stats flex flex-col items-center px-1 md:px-3">
+                        <div class="h-16 md:h-20 flex items-center justify-center mb-2 w-full">
+                            <!-- Убран <br>, текст немного уменьшен для идеального встраивания -->
+                            <div class="font-heading text-lg md:text-xl lg:text-2xl xl:text-3xl font-extrabold text-htss-dark leading-tight">BIM & Engineering</div>
+                        </div>
+                        <div class="font-heading text-[9px] md:text-[10px] lg:text-xs font-bold text-htss-dark/80 uppercase tracking-widest leading-relaxed">
+                            современные цифровые технологии проектирования
+                        </div>
                     </div>
-                    <div class="reveal-stats">
-                        <div class="font-heading text-3xl md:text-5xl font-extrabold text-htss-dark mb-1 md:mb-2"><span class="counter" data-target="450">0</span>+</div>
-                        <div class="font-heading text-[9px] md:text-xs font-bold text-htss-dark/80 uppercase tracking-widest">Профильных специалистов</div>
+                    
+                    <!-- Блок 3: 100% -->
+                    <div class="reveal-stats flex flex-col items-center px-1 md:px-3">
+                        <div class="h-16 md:h-20 flex items-center justify-center mb-2 w-full">
+                            <div class="font-heading text-4xl md:text-5xl lg:text-5xl xl:text-6xl font-extrabold text-htss-dark leading-none"><span class="counter" data-target="100">0</span>%</div>
+                        </div>
+                        <div class="font-heading text-[9px] md:text-[10px] lg:text-xs font-bold text-htss-dark/80 uppercase tracking-widest leading-relaxed">
+                            контроль качества и соблюдение сроков
+                        </div>
                     </div>
-                    <div class="reveal-stats">
-                        <div class="font-heading text-3xl md:text-5xl font-extrabold text-htss-dark mb-1 md:mb-2"><span class="counter" data-target="100">0</span>%</div>
-                        <div class="font-heading text-[9px] md:text-xs font-bold text-htss-dark/80 uppercase tracking-widest">Ответственность за результат</div>
+                    
+                    <!-- Блок 4: 15+ -->
+                    <div class="reveal-stats flex flex-col items-center px-1 md:px-3">
+                        <div class="h-16 md:h-20 flex items-center justify-center mb-2 w-full">
+                            <div class="font-heading text-4xl md:text-5xl lg:text-5xl xl:text-6xl font-extrabold text-htss-dark leading-none"><span class="counter" data-target="15">0</span>+</div>
+                        </div>
+                        <div class="font-heading text-[9px] md:text-[10px] lg:text-xs font-bold text-htss-dark/80 uppercase tracking-widest leading-relaxed">
+                            лет совокупного опыта руководителей проекта
+                        </div>
                     </div>
+
                 </div>
             </div>
 
@@ -307,7 +335,7 @@
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="text-center max-w-3xl mx-auto mb-12 md:mb-16 reveal-text">
                 <h2 class="font-heading text-3xl md:text-5xl font-extrabold mb-4 md:mb-6 uppercase text-white">Наша Философия и Миссия</h2>
-                <p class="text-gray-400 font-light text-sm md:text-lg">Проектирование определяет результат. Каждый успешный объект начинается с грамотного инженерного решения.</p>
+                <p class="text-gray-400 font-light text-sm md:text-lg">Проектирование определяет результат. Каждый успешный проект начинается с грамотного инженерного решения</p>
             </div>
             
             <div class="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8">
@@ -437,6 +465,7 @@
                     <svg class="w-8 h-8 md:w-10 md:h-10 text-htss-gold mb-4 md:mb-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"></path></svg>
                     <h4 class="font-heading text-base md:text-lg uppercase font-bold mb-3 text-white">Комплексная реализация</h4>
                     <ul class="text-gray-500 font-light text-xs md:text-sm space-y-2">
+                        <li>• Запуск производственной площадки</li>
                         <li>• Комплектация оборудованием</li>
                         <li>• Пусконаладочные работы</li>
                         <li>• Ввод в эксплуатацию</li>
@@ -707,6 +736,64 @@
         function openModal() { modalOverlay.style.visibility = 'visible'; gsap.to(modalOverlay, { opacity: 1, duration: 0.2 }); gsap.to(modalContent, { scale: 1, y: 0, opacity: 1, duration: 0.4, ease: "power2.out" }); document.body.style.overflow = 'hidden'; }
         function closeModal() { gsap.to(modalContent, { scale: 0.9, y: 30, opacity: 0, duration: 0.2, ease: "power2.in" }); gsap.to(modalOverlay, { opacity: 0, duration: 0.2, onComplete: () => { modalOverlay.style.visibility = 'hidden'; document.body.style.overflow = 'auto'; }}); }
         modalOverlay.addEventListener('click', (e) => { if(e.target === modalOverlay) closeModal(); });
+    </script>
+
+    <!-- СКРИПТ ПОИСКОВИКА -->
+    <script>
+        async function executeMarketSearch() {
+            const query = document.getElementById('marketSearchInput').value.trim();
+            if (!query) return;
+
+            const loader = document.getElementById('marketSearchLoader');
+            const resultsContainer = document.getElementById('marketSearchResults');
+            
+            loader.style.display = 'block';
+            resultsContainer.innerHTML = '';
+
+            try {
+                const response = await fetch(`/api/market_search?query=${encodeURIComponent(query)}`);
+                const data = await response.json();
+                
+                loader.style.display = 'none';
+
+                if (data.error) {
+                    resultsContainer.innerHTML = `<div class="alert alert-danger w-100 shadow-sm">${data.error}</div>`;
+                    return;
+                }
+
+                if (!data.results || data.results.length === 0) {
+                    resultsContainer.innerHTML = '<div class="text-center text-muted py-5 fw-medium">К сожалению, по данному запросу товары не найдены.</div>';
+                    return;
+                }
+
+                // Рисуем сетку карточек (по 3 в ряд на большом экране, по 1 на телефоне)
+                data.results.forEach(item => {
+                    const card = `
+                    <div class="col-12 col-md-6 col-xl-4">
+                        <div class="card h-100 border border-light shadow-sm" style="border-radius: 12px; transition: 0.3s;" onmouseover="this.style.transform='translateY(-3px)'" onmouseout="this.style.transform='translateY(0)'">
+                            <div class="card-body d-flex gap-3 align-items-center">
+                                <div style="width: 90px; height: 90px; flex-shrink: 0; background-color: #fff; border-radius: 8px; border: 1px solid #f1f5f9; display: flex; align-items: center; justify-content: center; padding: 5px;">
+                                    <img src="${item.thumbnail || '/static/argun-logo.svg'}" alt="Фото" style="max-width: 100%; max-height: 100%; object-fit: contain;">
+                                </div>
+                                <div class="flex-grow-1 min-w-0">
+                                    <h6 class="fw-bold mb-1 text-truncate" title="${item.title}">${item.title}</h6>
+                                    <div class="text-muted small mb-2"><i class="bi bi-shop text-primary me-1"></i>${item.source}</div>
+                                    <div class="d-flex justify-content-between align-items-center mt-3">
+                                        <span class="fw-bold fs-5 text-dark font-mono">${item.price}</span>
+                                        <a href="${item.link}" target="_blank" class="btn btn-sm btn-outline-secondary rounded-pill px-3" style="font-size: 0.8rem;">Перейти</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>`;
+                    resultsContainer.insertAdjacentHTML('beforeend', card);
+                });
+
+            } catch (error) {
+                loader.style.display = 'none';
+                resultsContainer.innerHTML = '<div class="alert alert-danger w-100">Произошла ошибка сети. Попробуйте еще раз.</div>';
+            }
+        }
     </script>
 </body>
 </html>
