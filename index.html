@@ -166,7 +166,8 @@
                 <div class="absolute inset-0 bg-gradient-to-t md:bg-gradient-to-r from-[#172554] via-[#172554]/80 to-transparent z-0"></div>
                 
                 <div class="relative z-20 w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-20 md:pt-0">
-                    <div class="max-w-3xl">
+                    <!-- ИЗМЕНЕНО: Расширен контейнер до max-w-5xl -->
+                    <div class="max-w-5xl">
                         <div class="text-mask mb-4 md:mb-6">
                             <h2 class="text-mask-inner font-heading text-htss-gold font-bold tracking-widest uppercase text-sm md:text-xl">
                                 Hi-Tech Smart Solutions
@@ -175,9 +176,11 @@
                         <h1 class="font-heading font-extrabold text-4xl md:text-6xl lg:text-7xl leading-[1.1] uppercase mb-6 md:mb-8 drop-shadow-xl">
                             <span class="text-mask"><span class="text-mask-inner" data-i18n="hero_title1">ПРОЕКТИРУЕМ.</span></span>
                             <span class="text-mask"><span class="text-mask-inner" data-i18n="hero_title2">СОЗДАЕМ.</span></span>
-                            <span class="text-mask"><span class="text-mask-inner text-htss-gold" data-i18n="hero_title3">РЕАЛИЗУЕМ.</span></span>
+                            <!-- ИЗМЕНЕНО: Добавлен класс md:whitespace-nowrap -->
+                            <span class="text-mask"><span class="text-mask-inner text-htss-gold md:whitespace-nowrap" data-i18n="hero_title3">РЕАЛИЗУЕМ.</span></span>
                         </h1>
-                        <div class="text-mask mb-8 md:mb-10">
+                        <!-- ИЗМЕНЕНО: Добавлено ограничение max-w-3xl только для описания, чтобы оно не растянулось -->
+                        <div class="text-mask mb-8 md:mb-10 max-w-3xl">
                             <p class="text-mask-inner text-gray-300 text-sm md:text-lg font-light leading-relaxed border-l-2 border-htss-gold pl-4" data-i18n="hero_desc">
                                 Инженерно-строительная компания, специализирующаяся на проектировании, строительстве и комплексной реализации объектов различного назначения.
                             </p>
@@ -204,7 +207,7 @@
                     <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-center">
                         <div>
                             <h2 class="anim-slide-2 font-heading text-htss-gold font-bold tracking-widest uppercase text-[10px] md:text-sm mb-2 md:mb-4" data-i18n="slide2_sub">Стратегия Развития</h2>
-                            <h3 class="anim-slide-2 font-heading font-extrabold uppercase text-3xl md:text-5xl mb-4 md:mb-6 leading-tight" data-i18n="slide2_title">НАДЕЖНОЕ <br/>ПАРТНЕРСТВО.</h3>
+                            <h3 class="anim-slide-2 font-heading font-extrabold uppercase text-3xl md:text-5xl mb-4 md:mb-6 leading-tight" data-i18n="slide2_title">НАДЕЖНОЕ <br/>ПАРТНЕРСТВО</h3>
                             <p class="anim-slide-2 text-gray-400 font-light text-sm md:text-lg mb-6 leading-relaxed" data-i18n="slide2_desc">Формирование надежных отношений с Заказчиками, основанных на ответственности, прозрачности и высоком качестве реализации проектов</p>
                         </div>
                         
@@ -247,7 +250,7 @@
                         </div>
                         <div class="order-1 lg:order-2 mt-16 md:mt-0">
                             <h2 class="anim-slide-3 font-heading text-htss-gold font-bold tracking-widest uppercase text-[10px] md:text-sm mb-2 md:mb-4" data-i18n="slide3_sub">Инженерное совершенство</h2>
-                            <h3 class="anim-slide-3 font-heading font-extrabold uppercase text-3xl md:text-5xl mb-4 md:mb-6 leading-tight" data-i18n="slide3_title">КОМПЛЕКСНЫЙ <br/>ЦИКЛ РАБОТ.</h3>
+                            <h3 class="anim-slide-3 font-heading font-extrabold uppercase text-3xl md:text-5xl mb-4 md:mb-6 leading-tight" data-i18n="slide3_title">КОМПЛЕКСНЫЙ <br/>ЦИКЛ РАБОТ</h3>
                             <p class="anim-slide-3 text-gray-400 font-light text-sm md:text-lg mb-8 leading-relaxed" data-i18n="slide3_desc">В основе нашей работы современные инженерные решения, внимание к деталям и понимание задач бизнеса. Мы стремимся создавать объекты, которые соответствуют действующим нормативам, эффективно эксплуатируются и сохраняют свою ценность на протяжении многих лет.</p>
                         </div>
                     </div>
@@ -338,7 +341,7 @@
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="text-center max-w-3xl mx-auto mb-12 md:mb-16 reveal-text">
                 <h2 class="font-heading text-3xl md:text-5xl font-extrabold mb-4 md:mb-6 uppercase text-white" data-i18n="phil_title">Наша Философия и Миссия</h2>
-                <p class="text-gray-400 font-light text-sm md:text-lg" data-i18n="phil_desc">Проектирование определяет результат. Каждый успешный объект начинается с грамотного инженерного решения.</p>
+                <p class="text-gray-400 font-light text-sm md:text-lg" data-i18n="phil_desc">Проектирование определяет результат. Каждый успешный проект начинается с грамотного инженерного решения</p>
             </div>
             
             <div class="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8">
@@ -581,16 +584,16 @@
                 hero_title1: "ПРОЕКТИРУЕМ.", hero_title2: "СОЗДАЕМ.", hero_title3: "РЕАЛИЗУЕМ.",
                 hero_desc: "Инженерно-строительная компания, специализирующаяся на проектировании, строительстве и комплексной реализации объектов различного назначения.",
                 hero_btn: "Получить консультацию", scroll_down: "Скролл вниз",
-                slide2_sub: "Стратегия Развития", slide2_title: "НАДЕЖНОЕ <br/>ПАРТНЕРСТВО.", slide2_desc: "Формирование надежных отношений с Заказчиками, основанных на ответственности, прозрачности и высоком качестве реализации проектов.",
+                slide2_sub: "Стратегия Развития", slide2_title: "НАДЕЖНОЕ <br/>ПАРТНЕРСТВО", slide2_desc: "Формирование надежных отношений с Заказчиками, основанных на ответственности, прозрачности и высоком качестве реализации проектов.",
                 chart1_title: "Развитие компетенций", chart2_title: "Реализация проектов", chart3_title: "Индексы эффективности",
                 badge_rel: "Надежность", badge_qual: "Качество", badge_inn: "Инновации", badge_resp: "Ответственность",
-                slide3_sub: "Инженерное совершенство", slide3_title: "КОМПЛЕКСНЫЙ <br/>ЦИКЛ РАБОТ.", slide3_desc: "В основе нашей работы современные инженерные решения, внимание к деталям и понимание задач бизнеса. Мы стремимся создавать объекты, которые соответствуют действующим нормативам, эффективно эксплуатируются и сохраняют свою ценность на протяжении многих лет.",
+                slide3_sub: "Инженерное совершенство", slide3_title: "КОМПЛЕКСНЫЙ <br/>ЦИКЛ РАБОТ", slide3_desc: "В основе нашей работы современные инженерные решения, внимание к деталям и понимание задач бизнеса. Мы стремимся создавать объекты, которые соответствуют действующим нормативам, эффективно эксплуатируются и сохраняют свою ценность на протяжении многих лет.",
                 stat_epc: "проектирование - строительство - управление", stat_bim: "современные цифровые технологии проектирования", stat_quality: "контроль качества и соблюдение сроков", stat_exp: "лет совокупного опыта руководителей проекта",
                 about_title1: "О нашей", about_title2: "Компании",
                 about_p1: "Команда <strong class='text-white font-medium'>Hi-Tech Smart Solutions</strong> объединяет специалистов в области проектирования, строительства и инженерных систем.",
                 about_p2: "Мы рассматриваем каждый объект как комплексную инженерную задачу, где важны точность проектных решений, грамотная организация работ и ответственность за конечный результат. Мы берем на себя полный цикл работ от разработки концепции до сдачи готового объекта.",
                 about_partner_title: "Надежный партнер", about_partner_desc: "Гарантия качества, соблюдение сроков и прозрачность взаимодействия.",
-                phil_title: "Наша Философия и Миссия", phil_desc: "Проектирование определяет результат. Каждый успешный объект начинается с грамотного инженерного решения.",
+                phil_title: "Наша Философия и Миссия", phil_desc: "Проектирование определяет результат. Каждый успешный проект начинается с грамотного инженерного решения",
                 phil_card1_title: "Проектировать с учетом будущего", phil_card1_desc: "Мы создаем инженерные решения, которые обеспечивают надежность, функциональность и экономическую эффективность объектов на всех этапах их жизненного цикла.",
                 phil_card2_title: "Реализовывать проекты комплексно", phil_card2_desc: "Берем на себя полный цикл работ от разработки концепции и проектирования до строительства, инженерного оснащения и ввода объекта в эксплуатацию.",
                 phil_card3_title: "Быть надежным партнером", phil_card3_desc: "Строим работу на принципах профессиональной ответственности, соблюдения сроков, прозрачности процессов и неизменно высокого качества исполнения.",
@@ -615,16 +618,16 @@
                 hero_title1: "ЖОБАЛАЙМЫЗ.", hero_title2: "ЖАСАЙМЫЗ.", hero_title3: "ЖҮЗЕГЕ АСЫРАМЫЗ.",
                 hero_desc: "Әртүрлі мақсаттағы нысандарды жобалауға, салуға және кешенді жүзеге асыруға маманданған инженерлік-құрылыс компаниясы.",
                 hero_btn: "Кеңес алу", scroll_down: "Төмен айналдыру",
-                slide2_sub: "Даму Стратегиясы", slide2_title: "СЕНІМДІ <br/>СЕРІКТЕСТІК.", slide2_desc: "Тапсырыс берушілермен жауапкершілік, ашықтық және жобаларды іске асырудың жоғары сапасына негізделген сенімді қарым-қатынастарды қалыптастыру.",
+                slide2_sub: "Даму Стратегиясы", slide2_title: "СЕНІМДІ <br/>СЕРІКТЕСТІК", slide2_desc: "Тапсырыс берушілермен жауапкершілік, ашықтық және жобаларды іске асырудың жоғары сапасына негізделген сенімді қарым-қатынастарды қалыптастыру.",
                 chart1_title: "Құзыреттерді дамыту", chart2_title: "Жобаларды іске асыру", chart3_title: "Тиімділік индекстері",
                 badge_rel: "Сенімділік", badge_qual: "Сапа", badge_inn: "Инновациялар", badge_resp: "Жауапкершілік",
-                slide3_sub: "Инженерлік кемелдік", slide3_title: "КЕШЕНДІ <br/>ЖҰМЫС ЦИКЛІ.", slide3_desc: "Біздің жұмысымыздың негізінде заманауи инженерлік шешімдер, бөлшектерге назар аудару және бизнес міндеттерін түсіну жатыр. Біз қолданыстағы нормативтерге сәйкес келетін, тиімді пайдаланылатын және көптеген жылдар бойы өз құндылығын сақтайтын нысандар құруға ұмтыламыз.",
+                slide3_sub: "Инженерлік кемелдік", slide3_title: "КЕШЕНДІ <br/>ЖҰМЫС ЦИКЛІ", slide3_desc: "Біздің жұмысымыздың негізінде заманауи инженерлік шешімдер, бөлшектерге назар аудару және бизнес міндеттерін түсіну жатыр. Біз қолданыстағы нормативтерге сәйкес келетін, тиімді пайдаланылатын және көптеген жылдар бойы өз құндылығын сақтайтын нысандар құруға ұмтыламыз.",
                 stat_epc: "жобалау - құрылыс - басқару", stat_bim: "заманауи цифрлық жобалау технологиялары", stat_quality: "сапаны бақылау және мерзімдерді сақтау", stat_exp: "жоба жетекшілерінің жиынтық жұмыс өтілі",
                 about_title1: "Біздің", about_title2: "Компания",
                 about_p1: "<strong class='text-white font-medium'>Hi-Tech Smart Solutions</strong> командасы жобалау, құрылыс және инженерлік жүйелер саласындағы мамандарды біріктіреді.",
                 about_p2: "Біз әрбір нысанды жобалық шешімдердің дәлдігі, жұмысты сауатты ұйымдастыру және түпкілікті нәтижеге жауапкершілік маңызды болатын кешенді инженерлік міндет ретінде қарастырамыз. Біз тұжырымдаманы әзірлеуден бастап дайын нысанды тапсыруға дейінгі толық жұмыс циклін өз мойнымызға аламыз.",
                 about_partner_title: "Сенімді серіктес", about_partner_desc: "Сапа кепілдігі, мерзімдерді сақтау және өзара іс-қимылдың ашықтығы.",
-                phil_title: "Біздің Философиямыз бен Миссиямыз", phil_desc: "Жобалау нәтижені анықтайды. Әрбір табысты нысан сауатты инженерлік шешімнен басталады.",
+                phil_title: "Біздің Философиямыз бен Миссиямыз", phil_desc: "Жобалау нәтижені анықтайды. Әрбір табысты жоба сауатты инженерлік шешімнен басталады",
                 phil_card1_title: "Болашақты ескере отырып жобалау", phil_card1_desc: "Біз нысандардың өмірлік циклінің барлық кезеңдерінде сенімділікті, функционалдылықты және экономикалық тиімділікті қамтамасыз ететін инженерлік шешімдерді жасаймыз.",
                 phil_card2_title: "Жобаларды кешенді жүзеге асыру", phil_card2_desc: "Біз тұжырымдаманы әзірлеу мен жобалаудан бастап құрылысқа, инженерлік жабдықтауға және нысанды пайдалануға беруге дейінгі толық жұмыс циклін өз мойнымызға аламыз.",
                 phil_card3_title: "Сенімді серіктес болу", phil_card3_desc: "Біз жұмысты кәсіби жауапкершілік, мерзімдерді сақтау, процестердің ашықтығы және орындаудың тұрақты жоғары сапасы қағидаттарына құрамыз.",
@@ -649,16 +652,16 @@
                 hero_title1: "DESIGN.", hero_title2: "BUILD.", hero_title3: "REALIZE.",
                 hero_desc: "An engineering and construction company specializing in the design, construction, and comprehensive implementation of various facilities.",
                 hero_btn: "Get a Consultation", scroll_down: "Scroll Down",
-                slide2_sub: "Development Strategy", slide2_title: "RELIABLE <br/>PARTNERSHIP.", slide2_desc: "Building reliable relationships with Clients based on responsibility, transparency, and high quality of project execution.",
+                slide2_sub: "Development Strategy", slide2_title: "RELIABLE <br/>PARTNERSHIP", slide2_desc: "Building reliable relationships with Clients based on responsibility, transparency, and high quality of project execution.",
                 chart1_title: "Competence Development", chart2_title: "Project Implementation", chart3_title: "Efficiency Indices",
                 badge_rel: "Reliability", badge_qual: "Quality", badge_inn: "Innovation", badge_resp: "Responsibility",
-                slide3_sub: "Engineering Excellence", slide3_title: "COMPREHENSIVE <br/>WORK CYCLE.", slide3_desc: "Our work is based on modern engineering solutions, attention to detail, and an understanding of business tasks. We strive to create facilities that comply with current regulations, operate efficiently, and retain their value for many years.",
+                slide3_sub: "Engineering Excellence", slide3_title: "COMPREHENSIVE <br/>WORK CYCLE", slide3_desc: "Our work is based on modern engineering solutions, attention to detail, and an understanding of business tasks. We strive to create facilities that comply with current regulations, operate efficiently, and retain their value for many years.",
                 stat_epc: "design - construction - management", stat_bim: "modern digital design technologies", stat_quality: "quality control and strict deadlines", stat_exp: "years of combined experience of project managers",
                 about_title1: "About Our", about_title2: "Company",
                 about_p1: "The <strong class='text-white font-medium'>Hi-Tech Smart Solutions</strong> team brings together specialists in the field of design, construction, and engineering systems.",
                 about_p2: "We view every object as a complex engineering task, where precision of design solutions, competent organization of work, and responsibility for the final result are paramount. We handle the entire cycle of work, from concept development to handing over the finished facility.",
                 about_partner_title: "Reliable Partner", about_partner_desc: "Quality assurance, adherence to deadlines, and transparent interaction.",
-                phil_title: "Our Philosophy and Mission", phil_desc: "Design determines the result. Every successful project begins with a sound engineering solution.",
+                phil_title: "Our Philosophy and Mission", phil_desc: "Design determines the result. Every successful project begins with a sound engineering solution",
                 phil_card1_title: "Design with the future in mind", phil_card1_desc: "We create engineering solutions that ensure reliability, functionality, and economic efficiency of facilities at all stages of their life cycle.",
                 phil_card2_title: "Implement projects comprehensively", phil_card2_desc: "We undertake the full cycle of work from concept development and design to construction, engineering equipment, and commissioning of the facility.",
                 phil_card3_title: "Be a reliable partner", phil_card3_desc: "We build our work on the principles of professional responsibility, meeting deadlines, process transparency, and consistently high quality of execution.",
