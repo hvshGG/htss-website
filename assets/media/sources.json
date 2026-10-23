@@ -1,0 +1,58 @@
+{
+    "description":  "Local optimized copies of the photographs and brand animation previously referenced by index.html. Photographs use 4:3 crops at 640 and 1280 pixels; video is muted H.264 with fast-start metadata.",
+    "photos":  [
+                   {
+                       "name":  "about",
+                       "source":  "https://images.unsplash.com/photo-1508450859948-4e04fabaa4ea",
+                       "variants":  [
+                                        "about-640.webp",
+                                        "about-1280.webp"
+                                    ]
+                   },
+                   {
+                       "name":  "commercial",
+                       "source":  "https://images.unsplash.com/photo-1486406146926-c627a92ad1ab",
+                       "variants":  [
+                                        "commercial-640.webp",
+                                        "commercial-1280.webp"
+                                    ]
+                   },
+                   {
+                       "name":  "logistics",
+                       "source":  "https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d",
+                       "variants":  [
+                                        "logistics-640.webp",
+                                        "logistics-1280.webp"
+                                    ]
+                   },
+                   {
+                       "name":  "network",
+                       "description":  "Power pylons at sunset",
+                       "author":  "Matthew Henry",
+                       "source":  "https://images.unsplash.com/photo-1473341304170-971dccb5ac1e",
+                       "sourcePage":  "https://unsplash.com/photos/photo-of-truss-towers-yETqkLnhsUI",
+                       "license":  "Unsplash License",
+                       "licenseUrl":  "https://unsplash.com/license",
+                       "variants":  [
+                                        "network-640.webp",
+                                        "network-1280.webp"
+                                    ]
+                   }
+               ],
+    "hero":  {
+                 "source":  "https://res.cloudinary.com/qrz1njiq/video/upload/v1785843449/timelapse_fsc9sw.mp4",
+                 "optimizedSource":  "https://res.cloudinary.com/qrz1njiq/video/upload/f_mp4,q_auto,w_1280/v1785843449/timelapse_fsc9sw.mp4",
+                 "video":  "hero.mp4",
+                 "posters":  [
+                                 "hero-poster-640.webp",
+                                 "hero-poster-1280.webp"
+                             ],
+                 "posterTimeSeconds":  6
+             },
+    "logo":  {
+        "source": "logo-web.svg",
+        "provenance": "User-provided logo",
+        "file": "logo.webp",
+        "optimization": "Browser-rendered original raster layers and mask; solid white background removed in a temporary copy; trimmed transparent margins; resized to 256x256 and losslessly encoded as WebP."
+    }
+}

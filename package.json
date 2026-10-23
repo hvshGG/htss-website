@@ -1,0 +1,17 @@
+{
+  "name": "htss-company-site",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "HTSS & CO. company website",
+  "engines": { "node": ">=24" },
+  "scripts": {
+    "build": "node --env-file-if-exists=.env scripts/build.mjs",
+    "start": "node --env-file-if-exists=.env server.mjs",
+    "dev": "node --env-file-if-exists=.env --watch server.mjs --source",
+    "test": "node --test tests/contact.test.mjs tests/publication.test.mjs",
+    "package": "node scripts/package.mjs",
+    "test:browser": "node tests/browser.mjs"
+  },
+  "dependencies": { "nodemailer": "10.1.7" }
+}
