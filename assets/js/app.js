@@ -341,12 +341,12 @@
                 Имя: payload.name,
                 Телефон: payload.phone,
                 Направление: sectors[payload.sector] || 'Не выбрано',
-                Сообщение: payload.message,
+                Сообщение: payload.message || 'Не указано',
                 Язык: languages[payload.language],
                 Согласие: payload.consent ? 'Да' : 'Нет',
                 _subject: '[HTSS] Новая заявка с сайта',
                 _template: 'table',
-                _honey: ''
+                _captcha: 'false'
             };
         }
 
@@ -393,12 +393,11 @@
                 setStatus('modal_sending', 'info');
                 updateSubmitButton();
                 const controller = new AbortController();
-                const timeout = window.setTimeout(function () { controller.abort(); }, 45000);
+                const timeout = window.setTimeout(function () { controller.abort(); }, 15000);
                 try {
                     const response = await fetch(endpoint, {
                         method: 'POST',
                         headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
-                        credentials: formMode === 'formsubmit' ? 'omit' : 'same-origin',
                         body: JSON.stringify(formMode === 'formsubmit' ? makeProviderPayload(payload) : payload),
                         signal: controller.signal
                     });
@@ -438,36 +437,33 @@
 
         const video = document.getElementById('hero-video');
         if (video) {
-            const desktopVideo = window.matchMedia('(min-width: 1024px)');
-            const connection = navigator.connection || navigator.mozConnection || navigator.webkitConnection;
             let onScreen = true;
             let sourceLoaded = false;
+            video.muted = true;
+            video.setAttribute('playsinline', '');
             video.addEventListener('playing', function () { video.classList.add('is-playing'); });
             ['pause', 'error', 'ended', 'emptied'].forEach(function (eventName) {
                 video.addEventListener(eventName, function () { video.classList.remove('is-playing'); });
             });
             function updateVideo() {
-                const restrictedConnection = connection && (connection.saveData || /^(slow-2g|2g|3g)$/.test(connection.effectiveType || ''));
-                const allowed = desktopVideo.matches && !reducedMotion.matches && !restrictedConnection;
-                if (!allowed || document.hidden || !onScreen) {
+                if (document.hidden || !onScreen) {
                     video.pause();
                     video.classList.remove('is-playing');
                     return;
                 }
                 if (!sourceLoaded) {
-                    const source = video.dataset.videoSrc;
+                    const source = video.dataset.videoSrc || video.getAttribute('src');
                     if (!source) return;
                     video.src = source;
                     video.load();
                     sourceLoaded = true;
                 }
                 const playback = video.play();
-                if (playback && typeof playback.catch === 'function') playback.catch(function () { /* Poster remains visible when autoplay is unavailable. */ });
+                if (playback && typeof playback.catch === 'function') {
+                    playback.catch(function () { /* Poster remains visible when autoplay is unavailable. */ });
+                }
             }
-            desktopVideo.addEventListener('change', updateVideo);
-            reducedMotion.addEventListener('change', updateVideo);
             document.addEventListener('visibilitychange', updateVideo);
-            if (connection && typeof connection.addEventListener === 'function') connection.addEventListener('change', updateVideo);
             if ('IntersectionObserver' in window) {
                 const observer = new IntersectionObserver(function (entries) {
                     onScreen = entries[0].isIntersecting;

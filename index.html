@@ -23,10 +23,10 @@
   <meta name="twitter:image" content="https://htss-co.kz/assets/media/hero-poster-1280.webp">
   <!-- site-meta:end -->
   <link rel="icon" href="icon.png" type="image/png">
-  <link rel="stylesheet" href="assets/css/site.css">
+  <link rel="stylesheet" href="assets/css/site.css?v=20261023-video">
   <script src="site-config.js" defer></script>
-  <script src="assets/js/i18n.js" defer></script>
-  <script src="assets/js/app.js" defer></script>
+  <script src="assets/js/i18n.js?v=20261023-video" defer></script>
+  <script src="assets/js/app.js?v=20261023-video" defer></script>
 </head>
 <body>
   <a class="skip-link" href="#main" data-i18n="skip_content">Перейти к содержимому</a>
@@ -83,7 +83,7 @@
           <source media="(max-width: 640px)" srcset="assets/media/hero-poster-640.webp">
           <img src="assets/media/hero-poster-1280.webp" width="1280" height="720" alt="" fetchpriority="high">
         </picture>
-        <video id="hero-video" data-video-src="assets/media/hero.mp4" muted loop playsinline preload="none" tabindex="-1"></video>
+        <video id="hero-video" src="assets/media/hero.mp4" data-video-src="assets/media/hero.mp4" autoplay muted loop playsinline preload="auto" tabindex="-1"></video>
       </div>
       <div class="container">
         <div class="hero-content">
@@ -104,7 +104,13 @@
         </div>
         <div class="hero-bottom">
           <p class="hero-signature" data-i18n="hero_eyebrow">Инженерные решения полного цикла</p>
-          <a class="scroll-cue" href="#about"><span data-i18n="scroll_down">Скролл вниз</span><svg aria-hidden="true"><use href="assets/icons/ui.svg#arrow-down"></use></svg></a>
+          <div class="hero-controls">
+            <button class="hero-video-toggle" id="hero-video-toggle" type="button" aria-controls="hero-video" data-playing="false" hidden>
+              <svg aria-hidden="true" viewBox="0 0 20 20" fill="currentColor"><path class="video-icon-play" d="m6 3 11 7-11 7V3Z"/><path class="video-icon-pause" d="M5 3h3v14H5zm7 0h3v14h-3z"/></svg>
+              <span data-i18n="video_play">Включить видео</span>
+            </button>
+            <a class="scroll-cue" href="#about"><span data-i18n="scroll_down">Скролл вниз</span><svg aria-hidden="true"><use href="assets/icons/ui.svg#arrow-down"></use></svg></a>
+          </div>
         </div>
         <noscript><p class="noscript-note">Для связи с нами позвоните <a href="tel:+77015919386">+7 701 591 9386</a> или напишите на <a href="mailto:info@htss-co.kz">info@htss-co.kz</a>. To contact us, please call or email.</p></noscript>
       </div>

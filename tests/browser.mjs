@@ -206,7 +206,7 @@ try {
     }
   }
   await viewport(1440,900); await evaluate("HTSS_APP.setLanguage('ru');window.scrollTo({top:0,behavior:'instant'})");
-  await evaluate("new Promise((resolve,reject)=>{let n=0;const timer=setInterval(()=>{const v=document.querySelector('#hero-video');if(!v.paused && v.readyState>=3 && v.classList.contains('is-playing')){clearInterval(timer);resolve(true)}else if(++n>100){clearInterval(timer);reject(Error('Background video did not start'))}},50)})");
+  await evaluate("new Promise((resolve,reject)=>{let n=0;const timer=setInterval(()=>{const v=document.querySelector('#hero-video');if(!v.paused && v.readyState>=3 && v.classList.contains('is-playing')){clearInterval(timer);resolve(true)}else if(++n>100){clearInterval(timer);reject(Error('Background video did not start: '+JSON.stringify({src:v.currentSrc,paused:v.paused,readyState:v.readyState,error:v.error?.message,muted:v.muted,hidden:document.hidden,reducedMotion:matchMedia('(prefers-reduced-motion: reduce)').matches,connection:navigator.connection?.effectiveType,saveData:navigator.connection?.saveData,rect:v.getBoundingClientRect().toJSON()}))) }},50)})");
   check('playing video completely covers the still poster',await evaluate("getComputedStyle(document.querySelector('#hero-video')).opacity"),'1');
   check('video does not crossfade with a different still frame',await evaluate("getComputedStyle(document.querySelector('#hero-video')).transitionDuration"),'0s');
   check('background video advances rather than freezing',await evaluate("(async()=>{const v=document.querySelector('#hero-video');const start=v.currentTime;await new Promise(r=>setTimeout(r,200));return v.currentTime!==start && !v.paused})()"));

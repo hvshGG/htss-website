@@ -5,6 +5,6 @@
 window.HTSS_CONFIG = Object.freeze({
   contactEmail: 'info@htss-co.kz',
   contactPhone: '+77015919386',
-  contactEndpoint: 'https://formsubmit.co/ajax/info%40htss-co.kz',
+  contactEndpoint: 'https://formsubmit.co/ajax/info@htss-co.kz',
   delivery: 'formsubmit'
 });

@@ -504,6 +504,45 @@ html[lang='kk'] .hero-title {
   color:#bdcde3;
   max-width:420px
 }
+.hero-controls {
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:24px;
+  flex-shrink:0;
+  max-width:100%
+}
+.hero-video-toggle {
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  gap:9px;
+  min-height:44px;
+  padding:10px 13px;
+  border:1px solid rgba(218,230,255,.3);
+  border-radius:8px;
+  background:rgba(11,22,44,.4);
+  color:#c3d0e3;
+  font:600 .65rem/1.5 var(--font-heading);
+  transition:background .2s,border-color .2s
+}
+.hero-video-toggle:hover {
+  background:rgba(255,255,255,.07);
+  border-color:var(--gold)
+}
+.hero-video-toggle svg {
+  width:16px;
+  height:16px;
+  flex:none;
+  color:var(--gold)
+}
+.hero-video-toggle .video-icon-pause,
+.hero-video-toggle[data-playing='true'] .video-icon-play {
+  display:none
+}
+.hero-video-toggle[data-playing='true'] .video-icon-pause {
+  display:block
+}
 .scroll-cue {
   display:flex;
   align-items:center;
@@ -1416,7 +1455,8 @@ html[lang='kk'] .hero-title {
     margin-top:38px;
     padding-top:18px;
     gap:18px;
-    align-items:flex-start
+    align-items:stretch;
+    flex-direction:column
   }
   .hero-signature {
     font-size:.56rem;
@@ -1689,9 +1729,6 @@ html[lang='kk'] .hero-title {
   *,*::before,*::after {
     animation:none!important;
     transition:none!important
-  }
-  .hero-background video {
-    display:none!important
   }
   .button:hover,.principle:hover,.direction-card:hover,.direction-card:hover img {
     transform:none
