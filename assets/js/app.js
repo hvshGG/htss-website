@@ -346,7 +346,7 @@
                 Согласие: payload.consent ? 'Да' : 'Нет',
                 _subject: '[HTSS] Новая заявка с сайта',
                 _template: 'table',
-                _captcha: 'false'
+                _honey: ''
             };
         }
 
@@ -393,15 +393,24 @@
                 setStatus('modal_sending', 'info');
                 updateSubmitButton();
                 const controller = new AbortController();
-                const timeout = window.setTimeout(function () { controller.abort(); }, 15000);
+                // External delivery can take longer than the local SMTP endpoint.
+                const timeout = window.setTimeout(function () { controller.abort(); }, formMode === 'formsubmit' ? 45000 : 15000);
                 try {
                     const response = await fetch(endpoint, {
                         method: 'POST',
-                        headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
-                        body: JSON.stringify(formMode === 'formsubmit' ? makeProviderPayload(payload) : payload),
+                        headers: formMode === 'formsubmit'
+                            ? { 'Accept': 'application/json' }
+                            : { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+                        // Form encoding is supported by FormSubmit and avoids a CORS preflight.
+                        body: formMode === 'formsubmit'
+                            ? new URLSearchParams(makeProviderPayload(payload))
+                            : JSON.stringify(payload),
                         signal: controller.signal
                     });
-                    const data = await response.json().catch(function () { return {}; });
+                    const data = await response.json().catch(function (error) {
+                        if (error && error.name === 'AbortError') throw error;
+                        return {};
+                    });
                     if (response.status === 429) {
                         setStatus('modal_rate_limited', 'error');
                         return;
@@ -413,6 +422,11 @@
                     const accepted = data && (formMode === 'formsubmit'
                         ? data.success === true || data.success === 'true'
                         : data.ok === true);
+                    if (formMode === 'formsubmit' && !accepted && data && typeof data.message === 'string'
+                        && /activat|confirm.{0,30}email|verif.{0,30}email/i.test(data.message)) {
+                        setStatus('modal_activation_required', 'error');
+                        return;
+                    }
                     if (!response.ok || !accepted) throw new Error('Request was not accepted');
                     form.reset();
                     setStatus(formMode === 'formsubmit' ? 'modal_provider_success' : 'modal_success', 'success');

@@ -8,6 +8,7 @@ import { fileURLToPath } from 'node:url';
 import { createServer } from '../server.mjs';
 
 const root = fileURLToPath(new URL('../', import.meta.url));
+const contactOnly = process.argv.includes('--contact-only');
 const browser = [process.env.CHROME_PATH,
   'C:/Program Files/Google/Chrome/Application/chrome.exe',
   'C:/Program Files (x86)/Microsoft/Edge/Application/msedge.exe',
@@ -146,11 +147,12 @@ try {
   })()`);
   const key = async (key, options = {}) => { const windowsVirtualKeyCode = { Escape: 27, Tab: 9 }[key]; await cdp('Input.dispatchKeyEvent', { type: 'keyDown', key, code: key, windowsVirtualKeyCode, ...options }); await cdp('Input.dispatchKeyEvent', { type: 'keyUp', key, code: key, windowsVirtualKeyCode, ...options }); };
   await cdp('Page.enable'); await cdp('Runtime.enable'); await cdp('Network.enable'); await cdp('Log.enable');
+  const layouts = [];
+  if (!contactOnly) {
   await viewport(320, 568); await navigate(base);
   check('configured recipient', await evaluate('window.HTSS_CONFIG.contactEmail'), 'info@htss-co.kz');
   check('no remote page dependencies', resources.filter((url) => /^https?:/.test(url) && !url.startsWith(base)), []);
   check('main header company logo loads', await loadedBrandImages('.navbar .brand-logo'), [true]);
-  const layouts = [];
   for (const [width, height] of [[320,568],[360,640],[390,844],[568,320],[768,1024]]) {
     await viewport(width, height);
     for (const lang of ['ru', 'kk', 'en']) {
@@ -258,17 +260,26 @@ try {
       await new Promise((resolve) => {fallback.close(resolve);fallback.closeAllConnections();});
     }
   }
+  }
   // Mock the existing production provider. DNS for formsubmit.co is blocked in
   // this browser, so even an interception failure cannot send a real request.
   const provider = createServer({ root: path.join(root, 'dist'), env: { CONTACT_TO:'info@htss-co.kz', CONTACT_PROVIDER:'formsubmit' } });
   await new Promise((resolve) => provider.listen(0,'127.0.0.1',resolve));
   const providerRequests = [];
+  let preflights = 0;
   let reply = { status: 200, data: { success: 'true' } };
   interceptRequest = async ({requestId,request}) => {
+    const currentReply = reply;
     const preflight = request.method === 'OPTIONS';
-    if (!preflight) providerRequests.push({url:request.url,method:request.method,body:JSON.parse(request.postData)});
+    if (preflight) preflights++;
+    if (!preflight) providerRequests.push({url:request.url,method:request.method,headers:request.headers,body:Object.fromEntries(new URLSearchParams(request.postData))});
+    if (!preflight && currentReply.delayMs) await pause(currentReply.delayMs);
+    if (!preflight && currentReply.networkError) {
+      await cdp('Fetch.failRequest', { requestId, errorReason: 'ConnectionClosed' });
+      return;
+    }
     await cdp('Fetch.fulfillRequest', {
-      requestId, responseCode:preflight ? 204 : reply.status,
+      requestId, responseCode:preflight ? 204 : currentReply.status,
       responseHeaders:[
         {name:'Access-Control-Allow-Origin',value:'*'},
         {name:'Access-Control-Allow-Methods',value:'POST, OPTIONS'},
@@ -276,7 +287,7 @@ try {
         {name:'Access-Control-Max-Age',value:'0'},
         {name:'Content-Type',value:'application/json; charset=utf-8'},
       ],
-      body:Buffer.from(preflight ? '' : reply.raw ?? JSON.stringify(reply.data)).toString('base64'),
+      body:Buffer.from(preflight ? '' : currentReply.raw ?? JSON.stringify(currentReply.data)).toString('base64'),
     });
   };
   await cdp('Fetch.enable',{patterns:[{urlPattern:'https://formsubmit.co/*',requestStage:'Request'}]});
@@ -293,21 +304,31 @@ try {
       {name:'HTTP error is not success',status:500,data:{success:true}},
       {name:'malformed JSON',status:200,raw:'<html>Upstream error</html>'},
       {name:'noncanonical success string',status:200,data:{success:'TRUE'}},
+      {name:'activation required',status:200,data:{success:'false',message:'This form needs Activation. Check your email.'},statusKey:'modal_activation_required'},
+      {name:'provider unavailable',status:503,data:{success:false},statusKey:'modal_unavailable'},
+      {name:'rate limited',status:429,data:{success:false},statusKey:'modal_rate_limited'},
+      {name:'network error',networkError:true},
       {name:'boolean true',status:200,data:{success:true},accepted:true},
       {name:'string true',status:200,data:{success:'true'},accepted:true},
+      {name:'response slower than old 15 second timeout',status:200,data:{success:'true'},delayMs:16000,accepted:true},
     ]) {
       reply=item;
       await evaluate("(()=>{const f=document.querySelector('#contact-form');f.elements.name.value='Тест';f.elements.phone.value='+7 701 123 45 67';f.elements.sector.value='eng';f.elements.message.value='Provider mock only';f.elements.consent.checked=true;f.requestSubmit()})()");
-      await evaluate("new Promise((resolve,reject)=>{let n=0;const timer=setInterval(()=>{if(!document.querySelector('#contact-submit').disabled){clearInterval(timer);resolve(true)}else if(++n>100){clearInterval(timer);reject(Error('Mock delivery timed out'))}},20)})");
+      await evaluate("new Promise((resolve,reject)=>{let n=0;const timer=setInterval(()=>{if(!document.querySelector('#contact-submit').disabled){clearInterval(timer);resolve(true)}else if(++n>1000){clearInterval(timer);reject(Error('Mock delivery timed out'))}},20)})");
       check(`FormSubmit ${item.name}`,await evaluate("document.querySelector('#contact-status').dataset.state"),item.accepted?'success':'error');
+      if (item.statusKey) check(`FormSubmit ${item.name} explains the cause`,await evaluate(`document.querySelector('#contact-status').textContent===HTSS_APP.t('${item.statusKey}')`));
       if (!item.accepted) check(`FormSubmit ${item.name} retains text`,await evaluate("document.querySelector('#contact-form').elements.message.value"),'Provider mock only');
     }
     check('provider acceptance wording',await evaluate("document.querySelector('#contact-status').textContent===HTSS_APP.t('modal_provider_success')"));
-    check('all provider posts intercepted',providerRequests.length,10);
+    check('all provider posts intercepted',providerRequests.length,15);
+    check('provider does not require a CORS preflight',preflights,0);
     const payload=providerRequests[0].body;
+    const contentType = Object.entries(providerRequests[0].headers).find(([name]) => name.toLowerCase() === 'content-type')?.[1];
+    check('provider uses form encoding',contentType?.startsWith('application/x-www-form-urlencoded'));
     check('provider field names',Object.keys(payload).sort(),['Имя','Телефон','Направление','Сообщение','Язык','Согласие','_subject','_template','_honey'].sort());
     check('provider recipient preserved',decodeURIComponent(new URL(providerRequests[0].url).pathname),'/ajax/info@htss-co.kz');
     check('provider request describes consent',payload.Согласие,'Да');
+    check('provider request preserves Cyrillic names and phone', {name:payload.Имя,phone:payload.Телефон}, {name:'Тест',phone:'+7 701 123 45 67'});
     check('provider does not disable captcha or invent source URL',!('_captcha' in payload) && !('_url' in payload));
   } finally {
     await cdp('Fetch.disable');
